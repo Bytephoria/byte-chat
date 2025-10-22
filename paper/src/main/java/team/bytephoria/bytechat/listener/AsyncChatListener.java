@@ -1,5 +1,6 @@
 package team.bytephoria.bytechat.listener;
 
+import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import team.bytephoria.bytechat.PaperPlugin;
 import team.bytephoria.bytechat.chat.format.ChatFormat;
+import team.bytephoria.bytechat.chat.renderer.ViewerUnawareChatRenderer;
 import team.bytephoria.bytechat.manager.ChatManager;
-import team.bytephoria.bytechat.chat.renderer.ByteChatRenderer;
 
 public final class AsyncChatListener implements Listener {
 
@@ -24,13 +25,14 @@ public final class AsyncChatListener implements Listener {
         final ChatFormat chatFormat = chatManager.search(player);
 
         if (chatFormat != null) {
-            asyncChatEvent.renderer(new ByteChatRenderer(
-                            chatFormat,
-                            asyncChatEvent.signedMessage(),
-                            this.paperPlugin.chatConfiguration(),
-                            this.paperPlugin.serializerAdapter()
-                    )
+            final ViewerUnawareChatRenderer viewerUnawareChatRenderer = new ViewerUnawareChatRenderer(
+                    chatFormat,
+                    asyncChatEvent.signedMessage(),
+                    this.paperPlugin.chatConfiguration(),
+                    this.paperPlugin.serializerAdapter()
             );
+
+            asyncChatEvent.renderer(ChatRenderer.viewerUnaware(viewerUnawareChatRenderer));
         }
     }
 
