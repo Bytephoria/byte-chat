@@ -1,0 +1,99 @@
+# ==============================================================
+# ByteChat - Chat Format Configuration
+# ==============================================================
+# 🧩 Default Chat Format
+# This file defines how chat messages are visually structured in-game.
+# Each "element" represents a visible part of the message (like name, separator, and text).
+#
+# Notes:
+# - You can define multiple formats (e.g. "vip", "staff", "global").
+# - The format with the highest priority that matches a player's permission will be used.
+# - All elements listed here will be combined in order to form the final chat message.
+# ==============================================================
+
+formats:
+  # Format identifier (you can create more under this section).
+  default:
+
+    # ----------------------------------------------------------
+    # Permission required to use this format.
+    # Leave empty ("") to make it available for all players.
+    # Example: "bytechat.format.vip"
+    # ----------------------------------------------------------
+    permission: ""
+
+    # ----------------------------------------------------------
+    # Determines which format has priority when multiple apply.
+    # Higher numbers take precedence.
+    # ----------------------------------------------------------
+    priority: 0
+
+    # ----------------------------------------------------------
+    # Defines how the chat message is built visually.
+    # Each element below will appear in order, joined together:
+    #   name -> separator -> message
+    #
+    # Example final output:
+    #   Foryy: Hello everyone!
+    #
+    # You can add or remove elements (like prefix, tag, suffix, etc.)
+    # to customize your layout further.
+    # ----------------------------------------------------------
+    elements:
+
+      # ----------------------------------------------------------
+      # PLAYER NAME ELEMENT
+      # ----------------------------------------------------------
+      # Shows the player's display name at the start of the message.
+      # You can apply color, style, and hover/click effects.
+      name:
+        # Text displayed for the player's name.
+        # {player} will be replaced with the sender's actual name.
+        text: "<gray>{player}"
+
+        # Tooltip shown when hovering over the name.
+        # Set enabled to true and list the lines to display.
+        hover: []
+
+        # Click behavior when clicking the name.
+        # Actions:
+        #   - RUN_COMMAND: executes instantly.
+        #   - SUGGEST_COMMAND: suggests a command in chat.
+        #   - OPEN_URL: opens a web link.
+        click:
+          action: "SUGGEST_COMMAND"
+          value: "/msg {player} "
+
+      # ----------------------------------------------------------
+      # SEPARATOR ELEMENT
+      # ----------------------------------------------------------
+      # Text or symbol that visually separates the name and message.
+      # Typically simple characters like ":" or "»".
+      separator:
+        text: ": "
+
+        # Optional hover tooltip.
+        hover: []
+
+        # Optional click behavior.
+        click:
+          action: "SUGGEST_COMMAND"
+          value: "/msg {player} "
+
+      # ----------------------------------------------------------
+      # MESSAGE ELEMENT
+      # ----------------------------------------------------------
+      # Displays the player's chat message.
+      # This is the main text body shown after the separator.
+      message:
+        # The player’s message content.
+        # {message} will be replaced with what they typed.
+        text: "{message}"
+
+        # Optional hover tooltip for the message.
+        hover: []
+
+        # Optional click interaction on the message.
+        click:
+          action: "SUGGEST_COMMAND"
+          value: "/msg {player} "

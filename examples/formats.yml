@@ -1,0 +1,87 @@
+formats:
+  vip:
+    permission: "bytechat.format.vip"
+    priority: 50
+
+    elements:
+
+      prefix:
+        text: "<gradient:#FFD700:#FFA500><bold>VIP</bold></gradient> "
+        hover:
+          - "<gray>╔════════════════════════════╗"
+          - "<gradient:#FFD700:#FFA500><bold>◆ VIP Rank ◆</bold></gradient>"
+          - ""
+          - "<gray>This player belongs to the</gray>"
+          - "<gradient:#FFD700:#FFA500><bold>Exclusive VIP Tier</bold></gradient>"
+          - "<gray>— reserved for top supporters.</gray>"
+          - "<gray>╚════════════════════════════╝"
+        click:
+          action: "RUN_COMMAND"
+          value: "/rank info vip"
+
+      tag:
+        text: "<gradient:#FFAEF0:#7DD3FC><bold>[Aurora]</bold></gradient> "
+        hover:
+          - "<gray>╔════════════════════════════╗"
+          - "<gradient:#7DD3FC:#FFAEF0><bold>◆ Tag: Aurora ◆</bold></gradient>"
+          - ""
+          - "<gray>Elegant, vibrant, and exclusive.</gray>"
+          - "<gray>Represents serenity and prestige.</gray>"
+          - "<gray>╚════════════════════════════╝"
+        click:
+          action: "RUN_COMMAND"
+          value: "/info aurora"
+
+      name:
+        text: "<gradient:#FFB6C1:#87CEFA:#B19CD9><bold>{player}</bold></gradient>"
+        hover:
+          - "<gray>╔════════════════════════════╗"
+          - "<gradient:#87CEFA:#FFB6C1><bold>◆ Player Information ◆</bold></gradient>"
+          - ""
+          - "<gray>• <white>Name:</white> <gradient:#FFB6C1:#87CEFA>{player}</gradient>"
+          - "<gray>• <white>Status:</white> <gradient:#A1FFCE:#FAFFD1>Online</gradient>"
+          - "<gray>• <white>Rank:</white> <gradient:#FFD700:#FFA500>VIP</gradient>"
+          - ""
+          - "<gradient:#7DD3FC:#FFAEF0>Click to send a private message</gradient>"
+          - "<gray>╚════════════════════════════╝"
+        click:
+          action: "SUGGEST_COMMAND"
+          value: "/msg {player} "
+
+      separator:
+        text: "<gradient:#C084FC:#7DD3FC><bold> » </bold></gradient>"
+        hover:
+          - "<gray>╭────────────────────────╮"
+          - "<gradient:#A3A3A3:#D1D1D1><bold>Message Separator</bold></gradient>"
+          - "<gray>Clean and simple transition</gray>"
+          - "<gray>between name and message.</gray>"
+          - "<gray>╰────────────────────────╯"
+
+      message:
+        text: "<gradient:#7DD3FC:#B19CD9:#FFAEF0><italic>{message}</italic></gradient>"
+        hover:
+          - "<gray>╔════════════════════════════╗"
+          - "<gradient:#7DD3FC:#FFAEF0><bold>◆ Message Info ◆</bold></gradient>"
+          - ""
+          - "<gray>• <white>Sender:</white> <gradient:#7DD3FC:#FFAEF0>{player}</gradient>"
+          - "<gray>• <white>Channel:</white> <gradient:#C084FC:#B19CD9>Global Chat</gradient>"
+          - "<gray>• <white>Type:</white> <gradient:#FFD700:#FFA500>VIP Message</gradient>"
+          - ""
+          - "<gradient:#7DD3FC:#FFAEF0>Elegant words from an elite member</gradient>"
+          - "<gray>╚════════════════════════════╝"
+        click:
+          action: "SUGGEST_COMMAND"
+          value: "/msg {player} "
+
+      suffix:
+        text: " <gradient:#FFD1DC:#C084FC>⋆</gradient>"
+        hover:
+          - "<gray>╔════════════════════════════╗"
+          - "<gradient:#FFD1DC:#C084FC><bold>◆ VIP Glow ◆</bold></gradient>"
+          - ""
+          - "<gray>A soft sparkle that completes</gray>"
+          - "<gray>the elegant VIP message aura.</gray>"
+          - "<gray>╚════════════════════════════╝"
+        click:
+          action: "RUN_COMMAND"
+          value: "/effects vipglow"

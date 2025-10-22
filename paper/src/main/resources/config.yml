@@ -1,0 +1,24 @@
+# ------------------------------
+# ByteChat - Main Configuration
+# ------------------------------
+# Global settings for chat rendering and behavior.
+
+settings:
+  # Format engine used to parse and render messages.
+  # Options:
+  #  - MINI_MESSAGE : <gray>, <bold>, <gradient:...>
+  #  - LEGACY_AMPERSAND : &a, &b, &l, etc.
+  serializer: "MINI_MESSAGE"
+
+chat:
+  # Enables ByteChat’s chat system.
+  # If false, the server’s default chat will be used.
+  enabled: true
+
+  # Default format used when no permission-based format matches.
+  default-format: "default"
+
+  # Allows players to use color and format codes in messages.
+  # MINI_MESSAGE → <gradient:...>, <bold>, etc.
+  # LEGACY_AMPERSAND → &a, &b, &l, etc.
+  text-formatting: true
