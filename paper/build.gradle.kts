@@ -33,6 +33,7 @@ paper {
     website = "https://bytephoria.team"
     apiVersion = "1.20"
     generateLibrariesJson = true
+    foliaSupported = true
 
     serverDependencies {
         register("PlaceholderAPI") {
