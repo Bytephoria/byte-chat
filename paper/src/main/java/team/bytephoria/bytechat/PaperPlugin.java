@@ -1,5 +1,6 @@
 package team.bytephoria.bytechat;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,8 @@ public final class PaperPlugin extends JavaPlugin {
     private ChatFormatRegistry chatFormatRegistry;
     private ChatManager chatManager;
 
+    private Metrics metrics;
+
     @Override
     public void onEnable() {
         this.chatConfiguration = this.loadConfiguration("config", ChatConfiguration.class, true);
@@ -52,11 +55,18 @@ public final class PaperPlugin extends JavaPlugin {
         }
 
         this.getServer().getCommandMap().register("bytechat", new ChatCommand(this));
+
+        this.metrics = new Metrics(this, 27686);
     }
 
     @Override
     public void onDisable() {
         HandlerList.unregisterAll(this);
+
+        if (this.metrics != null) {
+            this.metrics.shutdown();
+            this.metrics = null;
+        }
 
         this.formatConfiguration = null;
         this.chatConfiguration = null;

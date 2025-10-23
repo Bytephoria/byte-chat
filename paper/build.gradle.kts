@@ -19,6 +19,8 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
     api(project(":api"))
 
+    implementation("org.bstats:bstats-bukkit:3.0.2")
+
     compileOnly("org.spongepowered:configurate-yaml:4.2.0")
     compileOnly("me.clip:placeholderapi:2.11.6")
 }
@@ -46,6 +48,9 @@ paper {
 }
 
 tasks.shadowJar {
+
+    relocate("org.bstats", "team.bytephoria.bstats")
+
     archiveBaseName.set(rootProject.name)
     archiveVersion.set(rootProject.version.toString())
     archiveClassifier.set("")
