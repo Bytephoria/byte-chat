@@ -138,7 +138,12 @@ public final class ChatElement {
      * or if the replacement function returns {@code null}.
      */
     private @NotNull String apply(final @NotNull String input, final @Nullable Function<String, String> replacements) {
-        return (replacements == null) ? input : replacements.apply(input) != null ? replacements.apply(input) : input;
+        if (replacements == null) {
+            return input;
+        }
+
+        final String result = replacements.apply(input);
+        return result != null ? result : input;
     }
 
 }
