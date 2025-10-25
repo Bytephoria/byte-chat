@@ -76,7 +76,7 @@ public final class ChatElement {
             final @NotNull ComponentSerializerAdapter adapter,
             final @Nullable Function<String, String> replacements
     ) {
-        final String processedText = apply(this.text, replacements);
+        final String processedText = this.apply(this.text, replacements);
         Component component = adapter.getSerializer().deserialize(processedText);
 
         final HoverEvent<Component> hover = this.createHoverEvent(adapter, replacements);
@@ -112,7 +112,7 @@ public final class ChatElement {
                 continue;
             }
 
-            final String processed = apply(line, replacements);
+            final String processed = this.apply(line, replacements);
             lines.add(adapter.getSerializer().deserialize(processed));
         }
 
@@ -127,7 +127,7 @@ public final class ChatElement {
             return null;
         }
 
-        final String processedValue = apply(this.clickValue, replacements);
+        final String processedValue = this.apply(this.clickValue, replacements);
         return ClickEvent.clickEvent(this.clickAction, processedValue);
     }
 
