@@ -3,6 +3,7 @@ import net.minecrell.pluginyml.paper.PaperPluginDescription
 plugins {
     id("com.gradleup.shadow") version ("9.1.0")
     id("de.eldoria.plugin-yml.paper") version ("0.8.0")
+    id("xyz.jpenilla.run-paper") version ("3.0.2")
 }
 
 repositories {
@@ -47,13 +48,20 @@ paper {
 
 }
 
-tasks.shadowJar {
+tasks {
 
-    relocate("org.bstats", "team.bytephoria.bstats")
+    runServer {
+        minecraftVersion("1.21.10")
+    }
 
-    archiveBaseName.set(rootProject.name)
-    archiveVersion.set(rootProject.version.toString())
-    archiveClassifier.set("")
+    shadowJar {
+
+        relocate("org.bstats", "team.bytephoria.bstats")
+
+        archiveBaseName.set(rootProject.name)
+        archiveVersion.set(rootProject.version.toString())
+        archiveClassifier.set("")
+    }
 }
 
 /**
