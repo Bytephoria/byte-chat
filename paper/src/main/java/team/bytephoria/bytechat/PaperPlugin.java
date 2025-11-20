@@ -66,15 +66,18 @@ public final class PaperPlugin extends JavaPlugin {
 
         if (this.metrics != null) {
             this.metrics.shutdown();
-            this.metrics = null;
         }
 
+        if (this.chatFormatRegistry != null) {
+            this.chatFormatRegistry.clearAll();
+        }
+
+        this.metrics = null;
+        this.chatManager = null;
+        this.chatFormatRegistry = null;
+        this.componentSerializerAdapter = null;
         this.formatConfiguration = null;
         this.chatConfiguration = null;
-
-        this.componentSerializerAdapter = null;
-        this.chatFormatRegistry = null;
-        this.chatManager = null;
     }
 
     // I hate writing reload functions... but anything for my users!
