@@ -62,6 +62,7 @@ public final class PaperPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         HandlerList.unregisterAll(this);
+        this.getServer().getCommandMap().getKnownCommands().remove("bytechat");
 
         if (this.metrics != null) {
             this.metrics.shutdown();
