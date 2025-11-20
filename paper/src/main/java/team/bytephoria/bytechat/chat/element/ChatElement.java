@@ -77,7 +77,7 @@ public final class ChatElement {
             final @Nullable Function<String, String> replacements
     ) {
         final String processedText = this.apply(this.text, replacements);
-        Component component = adapter.getSerializer().deserialize(processedText);
+        Component component = adapter.deserialize(processedText);
 
         final HoverEvent<Component> hover = this.createHoverEvent(adapter, replacements);
         if (hover != null) {
@@ -113,7 +113,7 @@ public final class ChatElement {
             }
 
             final String processed = this.apply(line, replacements);
-            lines.add(adapter.getSerializer().deserialize(processed));
+            lines.add(adapter.deserialize(processed));
         }
 
         return HoverEvent.showText(ComponentUtil.joinLines(lines));

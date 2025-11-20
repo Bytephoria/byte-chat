@@ -80,7 +80,7 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
         if (!allowFormatting || !player.hasPermission(FeaturePermission.Format.COLOR)) {
             // Remove all formatting -> ensure message is plain text
             return PlainTextComponentSerializer.plainText().serialize(
-                    this.componentSerializerAdapter.getSerializer().deserialize(rawMessage)
+                    this.componentSerializerAdapter.deserialize(rawMessage)
             );
         }
 

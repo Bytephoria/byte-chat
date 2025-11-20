@@ -1,18 +1,18 @@
 package team.bytephoria.bytechat.serializer.component;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.jetbrains.annotations.NotNull;
 
-public final class MiniMessageComponentSerializerAdapter implements ComponentSerializerAdapter {
+public final class PlainComponentSerializerAdapter implements ComponentSerializerAdapter {
 
     @Override
     public @NotNull Component deserialize(final @NotNull String input) {
-        return MiniMessage.miniMessage().deserialize(input);
+        return PlainTextComponentSerializer.plainText().deserialize(input);
     }
 
     @Override
     public @NotNull String serialize(final @NotNull Component component) {
-        return MiniMessage.miniMessage().serialize(component);
+        return PlainTextComponentSerializer.plainText().serialize(component);
     }
 }

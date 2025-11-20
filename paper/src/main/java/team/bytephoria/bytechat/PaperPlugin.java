@@ -18,7 +18,7 @@ import team.bytephoria.bytechat.loader.ChatFormatLoader;
 import team.bytephoria.bytechat.manager.ChatManager;
 import team.bytephoria.bytechat.registry.ChatFormatRegistry;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
-import team.bytephoria.bytechat.serializer.component.ComponentSerializerProvider;
+import team.bytephoria.bytechat.serializer.component.ComponentSerializerFactory;
 
 import java.io.File;
 
@@ -40,11 +40,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.formatConfiguration = this.loadConfiguration("formats", FormatConfiguration.class, true);
 
         final String serializerType = this.chatConfiguration.settings().serializer();
-        if (!ComponentSerializerProvider.availableEngines().contains(serializerType.toUpperCase())) {
-            this.getLogger().warning("Unknown serializer type in config.yml: " + serializerType);
-        }
-
-        this.componentSerializerAdapter = new ComponentSerializerProvider(serializerType).get();
+        this.componentSerializerAdapter = ComponentSerializerFactory.create(serializerType);
         this.chatFormatRegistry = new ChatFormatRegistry();
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
 
