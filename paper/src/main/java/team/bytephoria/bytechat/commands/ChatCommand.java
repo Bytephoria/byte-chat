@@ -8,13 +8,13 @@ import org.jetbrains.annotations.NotNull;
 import team.bytephoria.bytechat.FeaturePermission;
 import team.bytephoria.bytechat.PaperPlugin;
 
-import java.util.List;
+import java.util.Collections;
 
 public final class ChatCommand extends BukkitCommand {
 
     private final PaperPlugin paperPlugin;
     public ChatCommand(final @NotNull PaperPlugin paperPlugin) {
-        super("bytechat", "Main command for ByteChat", "/<command>", List.of("bchat", "b-chat"));
+        super("bytechat", "Main command for ByteChat", "/<command>", Collections.emptyList());
         this.paperPlugin = paperPlugin;
     }
 
