@@ -102,7 +102,7 @@ public final class PaperPlugin extends JavaPlugin {
         return this.chatManager;
     }
 
-    private <T> @NotNull AbstractConfigurationLoader<@NotNull CommentedConfigurationNode> createConfiguration(final @NotNull String fileName, final @NotNull Class<T> tClass, final boolean copyFromResources) {
+    private @NotNull AbstractConfigurationLoader<@NotNull CommentedConfigurationNode> createConfiguration(final @NotNull String fileName, final boolean copyFromResources) {
         final File file = this.resolveFile(fileName);
         if (copyFromResources && !file.exists()) {
             this.saveResource(file.getName(), false);
@@ -117,7 +117,7 @@ public final class PaperPlugin extends JavaPlugin {
 
     private <T> @Nullable T loadConfiguration(final @NotNull String fileName, final @NotNull Class<T> tClass, final boolean copyFromResources) {
         final @NotNull AbstractConfigurationLoader<@NotNull CommentedConfigurationNode> yamlConfigurationLoader =
-                this.createConfiguration(fileName, tClass, copyFromResources);
+                this.createConfiguration(fileName, copyFromResources);
 
         try {
             final CommentedConfigurationNode commentedConfigurationNode = yamlConfigurationLoader.load();
