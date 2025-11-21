@@ -26,7 +26,6 @@ import java.io.File;
 public final class PaperPlugin extends JavaPlugin {
 
     private ChatConfiguration chatConfiguration;
-    private FormatConfiguration formatConfiguration;
 
     private ComponentSerializerAdapter componentSerializerAdapter;
 
@@ -39,7 +38,6 @@ public final class PaperPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.chatConfiguration = this.loadConfiguration("config", ChatConfiguration.class, true);
-        this.formatConfiguration = this.loadConfiguration("formats", FormatConfiguration.class, true);
 
         final String serializerType = this.chatConfiguration.settings().serializer();
         this.componentSerializerAdapter = ComponentSerializerFactory.create(serializerType);
@@ -47,7 +45,10 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
         this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
 
-        new ChatFormatLoader(this.chatFormatRegistry, this.formatConfiguration).load();
+        final FormatConfiguration formatConfiguration = this.loadConfiguration("formats", FormatConfiguration.class, true);
+        if (formatConfiguration != null) {
+            new ChatFormatLoader(this.chatFormatRegistry, formatConfiguration).load();
+        }
 
         if (this.chatConfiguration.chat().enabled()) {
             this.getServer().getPluginManager().registerEvents(new AsyncChatListener(this), this);
@@ -76,7 +77,6 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatManager = null;
         this.chatFormatRegistry = null;
         this.componentSerializerAdapter = null;
-        this.formatConfiguration = null;
         this.chatConfiguration = null;
     }
 
@@ -92,10 +92,6 @@ public final class PaperPlugin extends JavaPlugin {
 
     public ChatConfiguration chatConfiguration() {
         return this.chatConfiguration;
-    }
-
-    public FormatConfiguration formatConfiguration() {
-        return this.formatConfiguration;
     }
 
     public ComponentSerializerAdapter serializerAdapter() {
