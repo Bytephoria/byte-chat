@@ -65,13 +65,6 @@ The base configuration (`formats.yml`) defines how messages are displayed in cha
 
 ---
 
-## Advanced Example
-
-A more detailed and visually styled example for VIP players is available here:  
-[Click here](examples/formats.yml)
-
----
-
 ## Installation
 
 1. Download the plugin JAR file.
