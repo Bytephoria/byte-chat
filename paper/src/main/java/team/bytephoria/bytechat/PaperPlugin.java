@@ -19,6 +19,7 @@ import team.bytephoria.bytechat.manager.ChatManager;
 import team.bytephoria.bytechat.registry.ChatFormatRegistry;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerFactory;
+import team.bytephoria.bytechat.servive.MentionResolverService;
 
 import java.io.File;
 
@@ -31,6 +32,7 @@ public final class PaperPlugin extends JavaPlugin {
 
     private ChatFormatRegistry chatFormatRegistry;
     private ChatManager chatManager;
+    private MentionResolverService mentionResolverService;
 
     private Metrics metrics;
 
@@ -43,6 +45,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.componentSerializerAdapter = ComponentSerializerFactory.create(serializerType);
         this.chatFormatRegistry = new ChatFormatRegistry();
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
+        this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
 
         new ChatFormatLoader(this.chatFormatRegistry, this.formatConfiguration).load();
 
@@ -69,6 +72,7 @@ public final class PaperPlugin extends JavaPlugin {
         }
 
         this.metrics = null;
+        this.mentionResolverService = null;
         this.chatManager = null;
         this.chatFormatRegistry = null;
         this.componentSerializerAdapter = null;
@@ -80,6 +84,10 @@ public final class PaperPlugin extends JavaPlugin {
     public void reload() {
         this.onDisable();
         this.onEnable();
+    }
+
+    public MentionResolverService mentionResolverService() {
+        return this.mentionResolverService;
     }
 
     public ChatConfiguration chatConfiguration() {

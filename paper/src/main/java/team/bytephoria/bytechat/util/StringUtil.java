@@ -1,6 +1,7 @@
 package team.bytephoria.bytechat.util;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import team.bytephoria.bytechat.util.exception.NonInstantiableClassException;
 
 /**
@@ -16,6 +17,54 @@ public final class StringUtil {
     }
 
     /**
+     * Splits a string by a single character without using regex.
+     * <p>
+     * This method performs two linear passes:
+     * one to count parts and one to extract them.
+     * It avoids intermediate allocations and guarantees
+     * minimal overhead compared to {@link String#split(String)}.
+     *
+     * @param message   the input text to split
+     * @param splitChar the delimiter character
+     * @return an array containing the split segments,
+     *         or {@code null} if the input string is empty
+     */
+    public static @NotNull String @Nullable [] split(
+            final @NotNull String message,
+            final char splitChar
+    ) {
+        final int length = message.length();
+        if (length == 0) {
+            return null;
+        }
+
+        int parts = 0;
+        for (int index = 0; index < length; index++) {
+            final char character = message.charAt(index);
+            if (character == splitChar) {
+                parts++;
+            }
+        }
+
+        final String[] sections = new String[parts + 1];
+        int sectionIndex = 0;
+        int startIndex = 0;
+
+        for (int index = 0; index < length; index++) {
+            final char character = message.charAt(index);
+            if (character == splitChar) {
+                sections[sectionIndex] = message.substring(startIndex, index);
+                sectionIndex++;
+                startIndex = index + 1;
+            }
+        }
+
+        sections[sectionIndex] = message.substring(startIndex);
+        return sections;
+    }
+
+
+    /**
      * Replaces multiple placeholders in a string with their corresponding values.
      * <p>
      * The arguments must come in pairs: {@code placeholder, value}.
@@ -26,8 +75,8 @@ public final class StringUtil {
      *                    "{rank}", "Admin");
      * }</pre>
      *
-     * @param input         the base input string
-     * @param replacements  placeholder-value pairs (must be even length)
+     * @param input        the base input string
+     * @param replacements placeholder-value pairs (must be even length)
      * @return the string with all replacements applied
      * @throws IllegalArgumentException if an odd number of replacement arguments is provided
      */
@@ -59,9 +108,9 @@ public final class StringUtil {
      * <p>
      * This method avoids regex and uses a manual search for maximum performance.
      *
-     * @param input        the input text
-     * @param placeholder  the substring to replace
-     * @param replacement  the replacement text
+     * @param input       the input text
+     * @param placeholder the substring to replace
+     * @param replacement the replacement text
      * @return the resulting string with replacements applied
      */
     public static @NotNull String replaceSingle(

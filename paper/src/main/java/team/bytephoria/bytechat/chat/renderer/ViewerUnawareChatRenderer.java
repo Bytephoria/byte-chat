@@ -12,6 +12,7 @@ import team.bytephoria.bytechat.chat.format.ChatFormat;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
 import team.bytephoria.bytechat.placeholder.PlaceholderResolver;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
+import team.bytephoria.bytechat.servive.MentionResolverService;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -29,17 +30,20 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
     private final ChatFormat chatFormat;
     private final SignedMessage signedMessage;
     private final ChatConfiguration chatConfiguration;
+    private final MentionResolverService mentionResolverService;
     private final ComponentSerializerAdapter componentSerializerAdapter;
 
     public ViewerUnawareChatRenderer(
             final @NotNull ChatFormat chatFormat,
             final @NotNull SignedMessage signedMessage,
             final @NotNull ChatConfiguration chatConfiguration,
+            final @NotNull MentionResolverService mentionResolverService,
             final @NotNull ComponentSerializerAdapter componentSerializerAdapter
     ) {
         this.chatFormat = chatFormat;
         this.signedMessage = signedMessage;
         this.chatConfiguration = chatConfiguration;
+        this.mentionResolverService = mentionResolverService;
         this.componentSerializerAdapter = componentSerializerAdapter;
     }
 
@@ -50,6 +54,7 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
             final @NotNull Component message
     ) {
         // Prepare message text according to player permissions and configuration
+
         final String preparedMessage = this.preparePlayerMessage(source);
 
         // Build placeholder replacements for this player and message context
@@ -75,16 +80,23 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
      */
     private @NotNull String preparePlayerMessage(final @NotNull Player player) {
         final boolean allowFormatting = this.chatConfiguration.chat().textFormatting();
-        final String rawMessage = this.signedMessage.message();
+
+        String resolvedMessage = this.signedMessage.message(); // Raw message
 
         if (!allowFormatting || !player.hasPermission(FeaturePermission.Format.COLOR)) {
             // Remove all formatting -> ensure message is plain text
-            return PlainTextComponentSerializer.plainText().serialize(
-                    this.componentSerializerAdapter.deserialize(rawMessage)
+
+            resolvedMessage = PlainTextComponentSerializer.plainText().serialize(
+                    this.componentSerializerAdapter.deserialize(resolvedMessage)
             );
+
         }
 
-        return rawMessage;
+        if (this.chatConfiguration.chat().mentions().enabled() && player.hasPermission(FeaturePermission.Format.MENTION)) {
+            resolvedMessage = this.mentionResolverService.resolveMentions(player, resolvedMessage);
+        }
+
+        return resolvedMessage;
     }
 
     /**

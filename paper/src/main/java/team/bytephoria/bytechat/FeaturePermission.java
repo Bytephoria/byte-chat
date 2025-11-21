@@ -29,6 +29,9 @@ public final class FeaturePermission {
         /** Permission that allows players to use color and formatting codes in chat messages. */
         public static final String COLOR = "bytechat.format.color";
 
+        /** Permission that allows players to mention other players using @name. */
+        public static final String MENTION = "bytechat.format.mention";
+
     }
 
 }

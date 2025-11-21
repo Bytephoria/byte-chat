@@ -84,4 +84,5 @@ public final class FormatConfiguration {
             return value;
         }
     }
+
 }

@@ -22,3 +22,47 @@ chat:
   # MINI_MESSAGE → <gradient:...>, <bold>, etc.
   # LEGACY_AMPERSAND → &a, &b, &l, etc.
   text-formatting: true
+
+  mentions:
+    # Enables the mention system.
+    # When disabled, no mentions will be detected,
+    # and messages will be sent without highlight or sound.
+    enabled: true
+
+    # Character that triggers a player mention.
+    # Must be a visible, non-whitespace ASCII character.
+    # Typical options: '@', '!', '#', etc.
+    trigger-char: '@'
+
+    # Format applied when a mention is detected.
+    # Variables available:
+    #   - input_name  : The name typed by the user (raw, case as written)
+    #   - player_name : The real, exact in-game player name (with correct casing)
+    #
+    # NOTE: Mentions are case-insensitive, but the resolved player_name
+    #       will always use the player's real capitalization.
+    format: '<yellow>@{player_name}</yellow>'
+
+    # Whether players are allowed to mention themselves.
+    # If false, "@PlayerName" written by that same player will NOT trigger.
+    allow-self-mention: true
+
+    # Whether the mention sound should also play when a player mentions themselves.
+    # Only applies if 'allow-self-mention = true'.
+    self-mention-sound: true
+
+    sound:
+      # Sound played ONLY to the mentioned player.
+      # Set key: "" to disable sound.
+      #
+      # Recommended values:
+      #   "entity.player.levelup"
+      #   "block.note_block.pling"
+      key: "entity.player.levelup"
+
+      # Volume from 0.0 to 1.0+
+      volume: 1.0
+
+      # Pitch from 0.5 to 2.0
+      pitch: 2.0
+
