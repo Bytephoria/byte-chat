@@ -96,7 +96,7 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
         TagResolverService.TagResolutionResult tagResult = null;
 
         // Resolve custom tags before stripping formatting.
-        if (player.hasPermission(FeaturePermission.Format.TAG)) {
+        if (this.chatConfiguration.chat().tags().enabled() && player.hasPermission(FeaturePermission.Format.TAG)) {
             tagResult = this.tagResolverService.resolveTags(player, resolvedMessage);
             resolvedMessage = tagResult.processedMessage();
         }
