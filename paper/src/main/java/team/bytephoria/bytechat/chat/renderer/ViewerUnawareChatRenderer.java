@@ -90,7 +90,6 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
      * @return a pair containing the sanitized message string and the tag resolution results
      */
     private @NotNull Pair<String, TagResolverService.TagResolutionResult> preparePlayerMessage(final @NotNull Player player) {
-        final boolean allowFormatting = this.chatConfiguration.chat().textFormatting();
         String resolvedMessage = this.signedMessage.message(); // Raw signed message text
 
         TagResolverService.TagResolutionResult tagResult = null;
@@ -102,7 +101,7 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
         }
 
         // Strip formatting if disallowed for the player or globally disabled.
-        if (!allowFormatting || !player.hasPermission(FeaturePermission.Format.COLOR)) {
+        if (!this.chatConfiguration.chat().textFormatting() || !player.hasPermission(FeaturePermission.Format.COLOR)) {
             resolvedMessage = PlainTextComponentSerializer.plainText().serialize(
                     this.componentSerializerAdapter.deserialize(resolvedMessage)
             );
