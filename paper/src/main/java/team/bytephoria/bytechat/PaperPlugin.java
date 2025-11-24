@@ -20,6 +20,7 @@ import team.bytephoria.bytechat.registry.ChatFormatRegistry;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerFactory;
 import team.bytephoria.bytechat.service.MentionResolverService;
+import team.bytephoria.bytechat.chat.ChatMuteState;
 import team.bytephoria.bytechat.service.TagResolverService;
 import team.bytephoria.bytechat.ui.listener.InventoryClickListener;
 
@@ -34,6 +35,7 @@ public final class PaperPlugin extends JavaPlugin {
     private ChatFormatRegistry chatFormatRegistry;
     private ChatManager chatManager;
     private MentionResolverService mentionResolverService;
+    private ChatMuteState chatMuteState;
     private TagResolverService tagResolverService;
 
     private Metrics metrics;
@@ -48,6 +50,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
         this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
         this.tagResolverService = new TagResolverService(this.chatConfiguration);
+        this.chatMuteState = new ChatMuteState();
 
         final FormatConfiguration formatConfiguration = this.loadConfiguration("formats", FormatConfiguration.class, true);
         if (formatConfiguration != null) {
@@ -78,6 +81,7 @@ public final class PaperPlugin extends JavaPlugin {
         }
 
         this.metrics = null;
+        this.chatMuteState = null;
         this.mentionResolverService = null;
         this.chatManager = null;
         this.chatFormatRegistry = null;
@@ -110,6 +114,10 @@ public final class PaperPlugin extends JavaPlugin {
 
     public ChatManager chatManager() {
         return this.chatManager;
+    }
+
+    public ChatMuteState muteService() {
+        return this.chatMuteState;
     }
 
     private @NotNull AbstractConfigurationLoader<@NotNull CommentedConfigurationNode> createConfiguration(final @NotNull String fileName, final boolean copyFromResources) {

@@ -22,6 +22,16 @@ public final class FeaturePermission {
         /** Permission required to execute the /bytechat reload command. */
         public static final String RELOAD = "bytechat.command.reload";
 
+        /** Permission required to execute the /bytechat mute */
+        public static final String MUTE = "bytechat.command.mute";
+
+    }
+
+    public static final class Feature {
+
+        /** Permission to bypass global mute state. */
+        public static final String BYPASS_MUTE = "bytechat.bypass.mute";
+
     }
 
     public static final class Format {
