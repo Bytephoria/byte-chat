@@ -11,8 +11,8 @@ settings:
   serializer: "MINI_MESSAGE"
 
 chat:
-  # Enables ByteChat’s chat system.
-  # If false, the server’s default chat will be used.
+  # Enables ByteChat's chat system.
+  # If false, the server's default chat will be used.
   enabled: true
 
   # Default format used when no permission-based format matches.
@@ -66,3 +66,55 @@ chat:
       # Pitch from 0.5 to 2.0
       pitch: 2.0
 
+  tags:
+    # Enables the tag resolution system.
+    # When disabled, tags like {item}, {inv}, {armor} will not be processed.
+    enabled: true
+
+    # Maximum number of total tags a player can use in a single message.
+    # Set to -1 for unlimited.
+    max-tags-per-message: 1
+
+    item:
+      # Enables the {item} tag to show the item in the player's main hand.
+      enabled: true
+
+      # Format displayed when the player's hand is empty.
+      empty-hand-text: '[Empty Hand]'
+
+      # Color of the empty hand text.
+      # Options: GRAY, RED, YELLOW, etc.
+      empty-hand-color: 'GRAY'
+
+    inventory:
+      # Enables the {inv} tag to show a clickable inventory preview.
+      enabled: true
+
+      # Text displayed for the inventory link.
+      display-text: '[Inventory]'
+
+      # Color of the inventory link text.
+      display-color: 'AQUA'
+
+      # Maximum number of times the inventory link can be clicked.
+      max-clicks: 10
+
+      # Duration (in seconds) before the inventory link expires.
+      # After this time, clicking the link will no longer work.
+      expiration-seconds: 70
+
+    armor:
+      # Enables the {armor} tag to show a clickable armor/equipment preview.
+      enabled: true
+
+      # Text displayed for the armor inventory link.
+      display-text: '[Armor Inventory]'
+
+      # Color of the armor inventory link text.
+      display-color: 'AQUA'
+
+      # Maximum number of times the armor link can be clicked.
+      max-clicks: 10
+
+      # Duration (in seconds) before the armor link expires.
+      expiration-seconds: 3600

@@ -26,12 +26,24 @@ public final class FeaturePermission {
 
     public static final class Format {
 
-        /** Permission that allows players to use color and formatting codes in chat messages. */
+        /** Allows players to use color and formatting codes in chat messages. */
         public static final String COLOR = "bytechat.format.color";
 
-        /** Permission that allows players to mention other players using @name. */
+        /** Allows players to mention other players using @name. */
         public static final String MENTION = "bytechat.format.mention";
 
+        /** Allows players to use any supported chat tag. (Wildcard) */
+        public static final String TAG = "bytechat.format.tag.*";
+
+        /** Allows players to use [inv] tag. */
+        public static final String TAG_INVENTORY = "bytechat.format.tag.inventory";
+
+        /** Allows players to use [armor] tag. */
+        public static final String TAG_ARMOR = "bytechat.format.tag.armor";
+
+        /** Allows players to use [item] tag. */
+        public static final String TAG_ITEM = "bytechat.format.tag.item";
     }
+
 
 }

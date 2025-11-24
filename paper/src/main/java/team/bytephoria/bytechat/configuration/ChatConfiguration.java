@@ -1,3 +1,4 @@
+
 package team.bytephoria.bytechat.configuration;
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
@@ -48,6 +49,9 @@ public final class ChatConfiguration {
         @Setting("mentions")
         private Mentions mentions = new Mentions();
 
+        @Setting("tags")
+        private Tags tags = new Tags();
+
         public boolean enabled() {
             return enabled;
         }
@@ -62,6 +66,10 @@ public final class ChatConfiguration {
 
         public Mentions mentions() {
             return mentions;
+        }
+
+        public Tags tags() {
+            return tags;
         }
 
     }
@@ -109,6 +117,148 @@ public final class ChatConfiguration {
 
         public Sound sound() {
             return this.sound;
+        }
+    }
+
+    @ConfigSerializable
+    public static final class Tags {
+
+        @Setting("enabled")
+        private boolean enabled = true;
+
+        @Setting("max-tags-per-message")
+        private int maxTagsPerMessage = 1;
+
+        @Setting("item")
+        private ItemTag item = new ItemTag();
+
+        @Setting("inventory")
+        private InventoryTag inventory = new InventoryTag();
+
+        @Setting("armor")
+        private ArmorTag armor = new ArmorTag();
+
+        public boolean enabled() {
+            return this.enabled;
+        }
+
+        public int maxTagsPerMessage() {
+            return this.maxTagsPerMessage;
+        }
+
+        public ItemTag item() {
+            return this.item;
+        }
+
+        public InventoryTag inventory() {
+            return this.inventory;
+        }
+
+        public ArmorTag armor() {
+            return this.armor;
+        }
+
+        @ConfigSerializable
+        public static final class ItemTag {
+
+            @Setting("enabled")
+            private boolean enabled = true;
+
+            @Setting("empty-hand-text")
+            private String emptyHandText = "[Empty Hand]";
+
+            @Setting("empty-hand-color")
+            private String emptyHandColor = "GRAY";
+
+            public boolean enabled() {
+                return this.enabled;
+            }
+
+            public String emptyHandText() {
+                return this.emptyHandText;
+            }
+
+            public String emptyHandColor() {
+                return this.emptyHandColor;
+            }
+        }
+
+        @ConfigSerializable
+        public static final class InventoryTag {
+
+            @Setting("enabled")
+            private boolean enabled = true;
+
+            @Setting("display-text")
+            private String displayText = "[Inventory]";
+
+            @Setting("display-color")
+            private String displayColor = "AQUA";
+
+            @Setting("max-clicks")
+            private int maxClicks = 10;
+
+            @Setting("expiration-seconds")
+            private int expirationSeconds = 70;
+
+            public boolean enabled() {
+                return this.enabled;
+            }
+
+            public String displayText() {
+                return this.displayText;
+            }
+
+            public String displayColor() {
+                return this.displayColor;
+            }
+
+            public int maxClicks() {
+                return this.maxClicks;
+            }
+
+            public int expirationSeconds() {
+                return this.expirationSeconds;
+            }
+        }
+
+        @ConfigSerializable
+        public static final class ArmorTag {
+
+            @Setting("enabled")
+            private boolean enabled = true;
+
+            @Setting("display-text")
+            private String displayText = "[Armor Inventory]";
+
+            @Setting("display-color")
+            private String displayColor = "AQUA";
+
+            @Setting("max-clicks")
+            private int maxClicks = 10;
+
+            @Setting("expiration-seconds")
+            private int expirationSeconds = 3600;
+
+            public boolean enabled() {
+                return this.enabled;
+            }
+
+            public String displayText() {
+                return this.displayText;
+            }
+
+            public String displayColor() {
+                return this.displayColor;
+            }
+
+            public int maxClicks() {
+                return this.maxClicks;
+            }
+
+            public int expirationSeconds() {
+                return this.expirationSeconds;
+            }
         }
     }
 

@@ -19,7 +19,9 @@ import team.bytephoria.bytechat.manager.ChatManager;
 import team.bytephoria.bytechat.registry.ChatFormatRegistry;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerFactory;
-import team.bytephoria.bytechat.servive.MentionResolverService;
+import team.bytephoria.bytechat.service.MentionResolverService;
+import team.bytephoria.bytechat.service.TagResolverService;
+import team.bytephoria.bytechat.ui.listener.InventoryClickListener;
 
 import java.io.File;
 
@@ -32,6 +34,7 @@ public final class PaperPlugin extends JavaPlugin {
     private ChatFormatRegistry chatFormatRegistry;
     private ChatManager chatManager;
     private MentionResolverService mentionResolverService;
+    private TagResolverService tagResolverService;
 
     private Metrics metrics;
 
@@ -44,6 +47,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatFormatRegistry = new ChatFormatRegistry();
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
         this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
+        this.tagResolverService = new TagResolverService(this.chatConfiguration);
 
         final FormatConfiguration formatConfiguration = this.loadConfiguration("formats", FormatConfiguration.class, true);
         if (formatConfiguration != null) {
@@ -52,6 +56,7 @@ public final class PaperPlugin extends JavaPlugin {
 
         if (this.chatConfiguration.chat().enabled()) {
             this.getServer().getPluginManager().registerEvents(new AsyncChatListener(this), this);
+            this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         }
 
         this.getServer().getCommandMap().register("bytechat", new ChatCommand(this));
@@ -76,6 +81,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.mentionResolverService = null;
         this.chatManager = null;
         this.chatFormatRegistry = null;
+        this.tagResolverService = null;
         this.componentSerializerAdapter = null;
         this.chatConfiguration = null;
     }
@@ -84,6 +90,10 @@ public final class PaperPlugin extends JavaPlugin {
     public void reload() {
         this.onDisable();
         this.onEnable();
+    }
+
+    public TagResolverService tagResolverService() {
+        return this.tagResolverService;
     }
 
     public MentionResolverService mentionResolverService() {

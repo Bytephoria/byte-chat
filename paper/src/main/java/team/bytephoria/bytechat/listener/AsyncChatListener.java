@@ -30,6 +30,7 @@ public final class AsyncChatListener implements Listener {
                     asyncChatEvent.signedMessage(),
                     this.paperPlugin.chatConfiguration(),
                     this.paperPlugin.mentionResolverService(),
+                    this.paperPlugin.tagResolverService(),
                     this.paperPlugin.serializerAdapter()
             );
 
