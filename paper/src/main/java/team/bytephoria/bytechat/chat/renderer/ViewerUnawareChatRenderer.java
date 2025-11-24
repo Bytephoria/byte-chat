@@ -80,12 +80,9 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
      */
     private @NotNull String preparePlayerMessage(final @NotNull Player player) {
         final boolean allowFormatting = this.chatConfiguration.chat().textFormatting();
-
         String resolvedMessage = this.signedMessage.message(); // Raw message
-
         if (!allowFormatting || !player.hasPermission(FeaturePermission.Format.COLOR)) {
             // Remove all formatting -> ensure message is plain text
-
             resolvedMessage = PlainTextComponentSerializer.plainText().serialize(
                     this.componentSerializerAdapter.deserialize(resolvedMessage)
             );
