@@ -6,12 +6,12 @@ import org.jetbrains.annotations.NotNull;
 
 public final class CompleteInventoryPreviewMenu extends AbstractPreviewMenu {
 
-    private CompleteInventoryPreviewMenu(final @NotNull Player player) {
-        super(Component.text("Inventory of " + player.getName()));
+    private CompleteInventoryPreviewMenu(final @NotNull Player player, final @NotNull String title) {
+        super(Component.text(title));
     }
 
-    public static @NotNull CompleteInventoryPreviewMenu create(final @NotNull Player player) {
-        final CompleteInventoryPreviewMenu menu = new CompleteInventoryPreviewMenu(player);
+    public static @NotNull CompleteInventoryPreviewMenu create(final @NotNull Player player, final @NotNull String title) {
+        final CompleteInventoryPreviewMenu menu = new CompleteInventoryPreviewMenu(player, title);
         menu.populateInventory(player);
         return menu;
     }

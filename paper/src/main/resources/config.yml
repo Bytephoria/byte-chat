@@ -96,6 +96,9 @@ chat:
       # Color of the inventory link text.
       display-color: 'AQUA'
 
+      # Title of the inventory preview GUI.
+      preview-title: 'Inventory of a{player_name}'
+
       # Maximum number of times the inventory link can be clicked.
       max-clicks: 10
 
@@ -112,6 +115,9 @@ chat:
 
       # Color of the armor inventory link text.
       display-color: 'AQUA'
+
+      # Title of the armor preview GUI.
+      preview-title: 'Armor of {player_name}'
 
       # Maximum number of times the armor link can be clicked.
       max-clicks: 10

@@ -1,3 +1,4 @@
+
 package team.bytephoria.bytechat.ui;
 
 import net.kyori.adventure.text.Component;

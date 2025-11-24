@@ -13,6 +13,7 @@ import team.bytephoria.bytechat.FeaturePermission;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
 import team.bytephoria.bytechat.ui.CompleteInventoryPreviewMenu;
 import team.bytephoria.bytechat.ui.EquipmentPreviewMenu;
+import team.bytephoria.bytechat.util.StringUtil;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -150,7 +151,12 @@ public final class TagResolverService {
             return null;
         }
 
-        final EquipmentPreviewMenu previewMenu = EquipmentPreviewMenu.create(player);
+        final String armorTitle = StringUtil.replaceSingle(
+                this.configuration.chat().tags().armor().previewTitle(),
+                "{player_name}", player.getName()
+        );
+
+        final EquipmentPreviewMenu previewMenu = EquipmentPreviewMenu.create(player, armorTitle);
         final NamedTextColor color = this.parseColor(armorConfig.displayColor());
 
         return Component.text(armorConfig.displayText(), color)
@@ -174,7 +180,12 @@ public final class TagResolverService {
             return null;
         }
 
-        final CompleteInventoryPreviewMenu previewMenu = CompleteInventoryPreviewMenu.create(player);
+        final String inventoryTitle = StringUtil.replaceSingle(
+                this.configuration.chat().tags().inventory().previewTitle(),
+                "{player_name}", player.getName()
+        );
+
+        final CompleteInventoryPreviewMenu previewMenu = CompleteInventoryPreviewMenu.create(player, inventoryTitle);
         final NamedTextColor color = this.parseColor(invConfig.displayColor());
 
         return Component.text(invConfig.displayText(), color)

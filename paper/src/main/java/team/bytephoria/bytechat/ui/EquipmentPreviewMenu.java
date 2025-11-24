@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
 
 public final class EquipmentPreviewMenu extends AbstractPreviewMenu {
 
-    private EquipmentPreviewMenu(final @NotNull Player player) {
-        super(InventoryType.HOPPER, Component.text("Inventory of " + player.getName()));
+    private EquipmentPreviewMenu(final @NotNull Player player, final @NotNull String title) {
+        super(InventoryType.HOPPER, Component.text(title));
     }
 
-    public static @NotNull EquipmentPreviewMenu create(final @NotNull Player player) {
-        final EquipmentPreviewMenu menu = new EquipmentPreviewMenu(player);
+    public static @NotNull EquipmentPreviewMenu create(final @NotNull Player player, final @NotNull String title) {
+        final EquipmentPreviewMenu menu = new EquipmentPreviewMenu(player, title);
         menu.populateInventory(player);
         return menu;
     }
