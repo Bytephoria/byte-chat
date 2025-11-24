@@ -27,7 +27,6 @@ public final class ChatConfiguration {
         @Setting("serializer")
         private String serializer = "MINI_MESSAGE";
 
-        // Getters
         public String serializer() {
             return serializer;
         }
@@ -273,98 +272,6 @@ public final class ChatConfiguration {
             public int expirationSeconds() {
                 return this.expirationSeconds;
             }
-        }
-    }
-
-    @ConfigSerializable
-    public static final class Inventory {
-
-        @Setting("enabled")
-        private boolean enabled = true;
-
-        @Setting("display-text")
-        private String displayText = "[Inventory]";
-
-        @Setting("display-color")
-        private String displayColor = "AQUA";
-
-        @Setting("preview-title")
-        private String previewTitle = "Inventory of {player_name}";
-
-        @Setting("max-clicks")
-        private int maxClicks = 10;
-
-        @Setting("expiration-seconds")
-        private int expirationSeconds = 70;
-
-        public boolean enabled() {
-            return this.enabled;
-        }
-
-        public String displayText() {
-            return this.displayText;
-        }
-
-        public String displayColor() {
-            return this.displayColor;
-        }
-
-        public String previewTitle() {
-            return this.previewTitle;
-        }
-
-        public int maxClicks() {
-            return this.maxClicks;
-        }
-
-        public int expirationSeconds() {
-            return this.expirationSeconds;
-        }
-    }
-
-    @ConfigSerializable
-    public static final class Armor {
-
-        @Setting("enabled")
-        private boolean enabled = true;
-
-        @Setting("display-text")
-        private String displayText = "[Armor Inventory]";
-
-        @Setting("display-color")
-        private String displayColor = "AQUA";
-
-        @Setting("preview-title")
-        private String previewTitle = "Armor of {player_name}";
-
-        @Setting("max-clicks")
-        private int maxClicks = 10;
-
-        @Setting("expiration-seconds")
-        private int expirationSeconds = 3600;
-
-        public boolean enabled() {
-            return this.enabled;
-        }
-
-        public String displayText() {
-            return this.displayText;
-        }
-
-        public String displayColor() {
-            return this.displayColor;
-        }
-
-        public String previewTitle() {
-            return this.previewTitle;
-        }
-
-        public int maxClicks() {
-            return this.maxClicks;
-        }
-
-        public int expirationSeconds() {
-            return this.expirationSeconds;
         }
     }
 
