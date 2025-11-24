@@ -1,4 +1,4 @@
-package team.bytephoria.bytechat.servive;
+package team.bytephoria.bytechat.service;
 
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
