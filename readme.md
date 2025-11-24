@@ -49,12 +49,34 @@ Every element can include gradients, hover tooltips, and click actions — all d
 - Compatible with **PaperMC 1.20.2+**.
 
 ---
+## Command Permissions
 
-## Commands
+| Permission                 | Description                                       |
+|----------------------------|---------------------------------------------------|
+| `bytechat.command`         | Base permission for all ByteChat commands.        |
+| `bytechat.command.reload`  | Allows the player to run `/bytechat reload`.      |
+| `bytechat.command.mute`    | Allows the player to run `/bytechat mute`.        |
 
-| Command            | Permission                | Description                        |
-|--------------------|---------------------------|------------------------------------|
-| `/bytechat reload` | `bytechat.command.reload` | Reloads all configuration files.   |
+---
+
+## Feature Permissions
+
+| Permission             | Description                                      |
+|------------------------|--------------------------------------------------|
+| `bytechat.bypass.mute` | Allows the player to chat even if chat is muted. |
+
+---
+
+## Chat Format Permissions
+| Permission                      | Description                              |
+|---------------------------------|------------------------------------------|
+| `bytechat.format.color`         | Allows color & formatting codes.         |
+| `bytechat.format.mention`       | Allows mentioning players using `@name`. |
+| `bytechat.format.tag.*`         | Allows use of all supported tags.        |
+| `bytechat.format.tag.inventory` | Allows use of `[inv]` tag.               |
+| `bytechat.format.tag.armor`     | Allows use of `[armor]` tag.             |
+| `bytechat.format.tag.item`      | Allows use of `[item]` tag.              |
+
 
 ---
 
