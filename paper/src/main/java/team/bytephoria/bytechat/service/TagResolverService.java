@@ -201,6 +201,10 @@ public final class TagResolverService {
                         .build()));
     }
 
+    /**
+     * Creates a component for the player's ender chest preview.
+     * Clicking the component opens a GUI showing the ender chest contents.
+     */
     private @Nullable Component createEnderchestInventoryComponent(final @NotNull Player player) {
         final ChatConfiguration.EnderChestTag enderChestTag = this.configuration.chat().tags().enderChest();
         if (!enderChestTag.enabled() && !player.hasPermission(FeaturePermission.Format.TAG_ENDERCHEST)) {
