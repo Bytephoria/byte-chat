@@ -137,6 +137,9 @@ public final class ChatConfiguration {
         @Setting("armor")
         private ArmorTag armor = new ArmorTag();
 
+        @Setting("ender-chest")
+        private EnderChestTag enderChest = new EnderChestTag();
+
         public boolean enabled() {
             return this.enabled;
         }
@@ -155,6 +158,10 @@ public final class ChatConfiguration {
 
         public ArmorTag armor() {
             return this.armor;
+        }
+
+        public EnderChestTag enderChest() {
+            return this.enderChest;
         }
 
         @ConfigSerializable
@@ -273,6 +280,53 @@ public final class ChatConfiguration {
                 return this.expirationSeconds;
             }
         }
+    }
+
+    @ConfigSerializable
+    public static final class EnderChestTag {
+
+        @Setting("enabled")
+        private boolean enabled = true;
+
+        @Setting("display-text")
+        private String displayText = "[Ender Chest]";
+
+        @Setting("display-color")
+        private String displayColor = "LIGHT_PURPLE";
+
+        @Setting("preview-title")
+        private String previewTitle = "Enderchest of {player_name}";
+
+        @Setting("max-clicks")
+        private int maxClicks = 10;
+
+        @Setting("expiration-seconds")
+        private int expirationSeconds = 3600;
+
+        public boolean enabled() {
+            return this.enabled;
+        }
+
+        public String displayText() {
+            return this.displayText;
+        }
+
+        public String displayColor() {
+            return this.displayColor;
+        }
+
+        public String previewTitle() {
+            return this.previewTitle;
+        }
+
+        public int maxClicks() {
+            return this.maxClicks;
+        }
+
+        public int expirationSeconds() {
+            return this.expirationSeconds;
+        }
+
     }
 
     @ConfigSerializable

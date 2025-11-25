@@ -53,6 +53,10 @@ public final class FeaturePermission {
 
         /** Allows players to use [item] tag. */
         public static final String TAG_ITEM = "bytechat.format.tag.item";
+
+        /** Allows players to use [enderchest] tag. */
+        public static final String TAG_ENDERCHEST = "bytechat.format.tag.enderchest";
+
     }
 
 

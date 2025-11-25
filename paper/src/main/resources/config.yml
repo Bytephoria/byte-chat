@@ -68,7 +68,7 @@ chat:
 
   tags:
     # Enables the tag resolution system.
-    # When disabled, tags like {item}, {inv}, {armor} will not be processed.
+    # When disabled, tags like [item], [inv], [armor], [enderchest] will not be processed.
     enabled: true
 
     # Maximum number of total tags a player can use in a single message.
@@ -76,7 +76,7 @@ chat:
     max-tags-per-message: 1
 
     item:
-      # Enables the {item} tag to show the item in the player's main hand.
+      # Enables the [item] tag to show the item in the player's main hand.
       enabled: true
 
       # Format displayed when the player's hand is empty.
@@ -87,7 +87,7 @@ chat:
       empty-hand-color: 'GRAY'
 
     inventory:
-      # Enables the {inv} tag to show a clickable inventory preview.
+      # Enables the [inv] tag to show a clickable inventory preview.
       enabled: true
 
       # Text displayed for the inventory link.
@@ -97,7 +97,9 @@ chat:
       display-color: 'AQUA'
 
       # Title of the inventory preview GUI.
-      preview-title: 'Inventory of a{player_name}'
+      # Variables:
+      #   - [player_name] : The target player's exact name.
+      preview-title: 'Inventory of [player_name]'
 
       # Maximum number of times the inventory link can be clicked.
       max-clicks: 10
@@ -107,7 +109,7 @@ chat:
       expiration-seconds: 70
 
     armor:
-      # Enables the {armor} tag to show a clickable armor/equipment preview.
+      # Enables the [armor] tag to show a clickable armor/equipment preview.
       enabled: true
 
       # Text displayed for the armor inventory link.
@@ -117,10 +119,34 @@ chat:
       display-color: 'AQUA'
 
       # Title of the armor preview GUI.
-      preview-title: 'Armor of {player_name}'
+      # Variables:
+      #   - [player_name] : The target player's exact name.
+      preview-title: 'Armor of [player_name]'
 
       # Maximum number of times the armor link can be clicked.
       max-clicks: 10
 
       # Duration (in seconds) before the armor link expires.
+      expiration-seconds: 3600
+
+    ender-chest:
+      # Enables the [ec] or [ender] tag to show a clickable
+      # Ender Chest preview of the target player.
+      enabled: true
+
+      # Text displayed for the Ender Chest preview link.
+      display-text: '[Ender Chest]'
+
+      # Color of the Ender Chest link text.
+      display-color: 'LIGHT_PURPLE'
+
+      # Title of the Ender Chest preview GUI.
+      # Variables:
+      #   - [player_name] : The real, exact name of the player.
+      preview-title: 'Ender Chest of [player_name]'
+
+      # Maximum number of times the Ender Chest link can be clicked.
+      max-clicks: 10
+
+      # Duration (in seconds) before the Ender Chest link expires.
       expiration-seconds: 3600

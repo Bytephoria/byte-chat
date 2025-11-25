@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import team.bytephoria.bytechat.FeaturePermission;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
 import team.bytephoria.bytechat.ui.CompleteInventoryPreviewMenu;
+import team.bytephoria.bytechat.ui.EnderChestPreviewMenu;
 import team.bytephoria.bytechat.ui.EquipmentPreviewMenu;
 import team.bytephoria.bytechat.util.StringUtil;
 
@@ -116,6 +117,7 @@ public final class TagResolverService {
             case "item" -> this.createItemComponent(player);
             case "inv" -> this.createInventoryComponent(player);
             case "armor" -> this.createEquipmentComponent(player);
+            case "ec", "ender", "enderchest" -> this.createEnderchestInventoryComponent(player);
             default -> null;
         };
     }
@@ -197,6 +199,31 @@ public final class TagResolverService {
                         .uses(invConfig.maxClicks())
                         .lifetime(Duration.ofSeconds(invConfig.expirationSeconds()))
                         .build()));
+    }
+
+    private @Nullable Component createEnderchestInventoryComponent(final @NotNull Player player) {
+        final ChatConfiguration.EnderChestTag enderChestTag = this.configuration.chat().tags().enderChest();
+        if (!enderChestTag.enabled() && !player.hasPermission(FeaturePermission.Format.TAG_ENDERCHEST)) {
+            return null;
+        }
+
+        final String inventoryTitle = StringUtil.replaceSingle(
+                enderChestTag.previewTitle(),
+                "{player_name}", player.getName()
+        );
+
+        final EnderChestPreviewMenu enderChestPreviewMenu = EnderChestPreviewMenu.create(player, Component.text(inventoryTitle));
+
+        return Component.text(enderChestTag.displayText(), this.parseColor(enderChestTag.displayColor()))
+                .clickEvent(ClickEvent.callback(audience -> {
+                    if (audience instanceof Player clickedPlayer) {
+                        clickedPlayer.openInventory(enderChestPreviewMenu.getInventory());
+                    }
+                }, ClickCallback.Options.builder()
+                        .uses(enderChestTag.maxClicks())
+                        .lifetime(Duration.ofSeconds(enderChestTag.expirationSeconds()))
+                        .build()));
+
     }
 
     /**
