@@ -68,14 +68,15 @@ Every element can include gradients, hover tooltips, and click actions — all d
 ---
 
 ## Chat Format Permissions
-| Permission                      | Description                              |
-|---------------------------------|------------------------------------------|
-| `bytechat.format.color`         | Allows color & formatting codes.         |
-| `bytechat.format.mention`       | Allows mentioning players using `@name`. |
-| `bytechat.format.tag.*`         | Allows use of all supported tags.        |
-| `bytechat.format.tag.inventory` | Allows use of `[inv]` tag.               |
-| `bytechat.format.tag.armor`     | Allows use of `[armor]` tag.             |
-| `bytechat.format.tag.item`      | Allows use of `[item]` tag.              |
+| Permission                       | Description                              |
+|----------------------------------|------------------------------------------|
+| `bytechat.format.color`          | Allows color & formatting codes.         |
+| `bytechat.format.mention`        | Allows mentioning players using `@name`. |
+| `bytechat.format.tag.*`          | Allows use of all supported tags.        |
+| `bytechat.format.tag.inventory`  | Allows use of `[inv]` tag.               |
+| `bytechat.format.tag.armor`      | Allows use of `[armor]` tag.             |
+| `bytechat.format.tag.item`       | Allows use of `[item]` tag.              |
+| `bytechat.format.tag.enderchest` | Allows use of `[enderchest]` tag.        |
 
 
 ---
