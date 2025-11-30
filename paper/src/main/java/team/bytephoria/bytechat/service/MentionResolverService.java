@@ -51,11 +51,9 @@ public final class MentionResolverService {
                 continue;
             }
 
-            final String formattedMention = StringUtil.replace(
-                    mentions.format(),
-                    "{input_name}", mentionedPlayerName,
-                    "{player_name}", mentionedPlayer.getName()
-            );
+            final String formattedMention = mentions.format()
+                    .replace("{input_name}", mentionedPlayerName)
+                    .replace("{player_name}", mentionedPlayer.getName());
 
             this.appendWord(stringBuilder, formattedMention, i, parts.length);
             if (!mentions.selfMentionSound() && mentionedPlayer == player) {

@@ -14,7 +14,6 @@ import team.bytephoria.bytechat.configuration.ChatConfiguration;
 import team.bytephoria.bytechat.ui.CompleteInventoryPreviewMenu;
 import team.bytephoria.bytechat.ui.EnderChestPreviewMenu;
 import team.bytephoria.bytechat.ui.EquipmentPreviewMenu;
-import team.bytephoria.bytechat.util.StringUtil;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -153,10 +152,8 @@ public final class TagResolverService {
             return null;
         }
 
-        final String armorTitle = StringUtil.replaceSingle(
-                this.configuration.chat().tags().armor().previewTitle(),
-                "{player_name}", player.getName()
-        );
+        final String armorTitle = this.configuration.chat().tags().armor().previewTitle()
+                .replace("{player_name}", player.getName());
 
         final EquipmentPreviewMenu previewMenu = EquipmentPreviewMenu.create(player, armorTitle);
         final NamedTextColor color = this.parseColor(armorConfig.displayColor());
@@ -182,10 +179,8 @@ public final class TagResolverService {
             return null;
         }
 
-        final String inventoryTitle = StringUtil.replaceSingle(
-                this.configuration.chat().tags().inventory().previewTitle(),
-                "{player_name}", player.getName()
-        );
+        final String inventoryTitle = this.configuration.chat().tags().inventory().previewTitle()
+                .replace("{player_name}", player.getName());
 
         final CompleteInventoryPreviewMenu previewMenu = CompleteInventoryPreviewMenu.create(player, inventoryTitle);
         final NamedTextColor color = this.parseColor(invConfig.displayColor());
@@ -211,13 +206,10 @@ public final class TagResolverService {
             return null;
         }
 
-        final String inventoryTitle = StringUtil.replaceSingle(
-                enderChestTag.previewTitle(),
-                "{player_name}", player.getName()
-        );
+        final String inventoryTitle = enderChestTag.previewTitle()
+                .replace("{player_name}", player.getName());
 
         final EnderChestPreviewMenu enderChestPreviewMenu = EnderChestPreviewMenu.create(player, Component.text(inventoryTitle));
-
         return Component.text(enderChestTag.displayText(), this.parseColor(enderChestTag.displayColor()))
                 .clickEvent(ClickEvent.callback(audience -> {
                     if (audience instanceof Player clickedPlayer) {

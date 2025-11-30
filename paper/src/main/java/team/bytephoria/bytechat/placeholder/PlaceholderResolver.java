@@ -4,7 +4,6 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import team.bytephoria.bytechat.util.StringUtil;
 import team.bytephoria.bytechat.util.exception.NonInstantiableClassException;
 
 import java.util.function.Function;
@@ -68,10 +67,9 @@ public final class PlaceholderResolver {
                     : input;
 
             // Replace internal placeholders with player-specific data
-            return StringUtil.replace(inputParsed,
-                    "{player}", player.getName(),
-                    "{message}", message
-            );
+            return inputParsed
+                    .replace("{player}", player.getName())
+                    .replace("{message}", message);
         };
     }
 }
