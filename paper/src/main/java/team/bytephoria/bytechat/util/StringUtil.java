@@ -5,10 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import team.bytephoria.bytechat.util.exception.NonInstantiableClassException;
 
 /**
- * Utility class for efficient string replacement operations.
+ * Utility class providing general-purpose methods for working with strings.
  * <p>
- * Provides optimized methods for replacing multiple placeholder-value pairs
- * without using regular expressions or creating unnecessary intermediate objects.
+ * Includes operations such as splitting, formatting, and other common string
+ * manipulations that can be reused across the project.
  */
 public final class StringUtil {
 
