@@ -27,10 +27,16 @@ public final class ChatConfiguration {
         @Setting("serializer")
         private String serializer = "MINI_MESSAGE";
 
+        @Setting("player-input-serializer")
+        private String playerInputSerializer = "LIMITED_MINI_MESSAGE";
+
         public String serializer() {
             return serializer;
         }
 
+        public String playerInputSerializer() {
+            return this.playerInputSerializer;
+        }
     }
 
     @ConfigSerializable

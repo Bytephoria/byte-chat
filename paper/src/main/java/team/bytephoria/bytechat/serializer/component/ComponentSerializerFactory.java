@@ -15,6 +15,7 @@ public final class ComponentSerializerFactory {
         return switch (format.trim().toUpperCase(Locale.ROOT)) {
             case "LEGACY_AMPERSAND" -> new LegacyAmpersandComponentSerializerAdapter();
             case "MINI_MESSAGE" -> new MiniMessageComponentSerializerAdapter();
+            case "LIMITED_MINI_MESSAGE" -> new LimitedMiniMessageComponentSerializerAdapter();
             default -> new PlainComponentSerializerAdapter();
         };
     }

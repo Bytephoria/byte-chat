@@ -18,6 +18,7 @@ import team.bytephoria.bytechat.ui.EquipmentPreviewMenu;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Handles the resolution of inline chat tags by converting them into
@@ -29,11 +30,20 @@ public final class TagResolverService {
     private static final char OPEN_BRACKET = '[';
     private static final char CLOSE_BRACKET = ']';
 
-    private static final String PLACEHOLDER_PREFIX = "<<<BYTECHAT_TAG_";
-    private static final String PLACEHOLDER_SUFFIX = ">>>";
+    public static final String PLACEHOLDER_PREFIX = "<<<BYTECHAT_TAG_";
+    public static final String PLACEHOLDER_SUFFIX = ">>>";
+
+    /**
+     * Pre-compiled pattern for splitting strings on ByteChat placeholder boundaries.
+     * Matches immediately before a prefix and immediately after a suffix, allowing
+     * callers to isolate placeholder markers from surrounding text in a single pass.
+     */
+    public static final Pattern PLACEHOLDER_SPLIT_PATTERN = Pattern.compile(
+            "(?=" + Pattern.quote(PLACEHOLDER_PREFIX) + ")"
+                    + "|(?<=" + Pattern.quote(PLACEHOLDER_SUFFIX) + ")"
+    );
 
     private final ChatConfiguration configuration;
-
     public TagResolverService(final @NotNull ChatConfiguration configuration) {
         this.configuration = configuration;
     }

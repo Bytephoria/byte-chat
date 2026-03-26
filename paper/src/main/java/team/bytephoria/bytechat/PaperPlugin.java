@@ -31,6 +31,7 @@ public final class PaperPlugin extends JavaPlugin {
     private ChatConfiguration chatConfiguration;
 
     private ComponentSerializerAdapter componentSerializerAdapter;
+    private ComponentSerializerAdapter chatSerializerAdapter;
 
     private ChatFormatRegistry chatFormatRegistry;
     private ChatManager chatManager;
@@ -45,7 +46,11 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatConfiguration = this.loadConfiguration("config", ChatConfiguration.class, true);
 
         final String serializerType = this.chatConfiguration.settings().serializer();
+        final String chatSerializerType = this.chatConfiguration.settings().playerInputSerializer();
+
         this.componentSerializerAdapter = ComponentSerializerFactory.create(serializerType);
+        this.chatSerializerAdapter = ComponentSerializerFactory.create(chatSerializerType);
+
         this.chatFormatRegistry = new ChatFormatRegistry();
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
         this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
@@ -87,6 +92,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatFormatRegistry = null;
         this.tagResolverService = null;
         this.componentSerializerAdapter = null;
+        this.chatSerializerAdapter = null;
         this.chatConfiguration = null;
     }
 
@@ -110,6 +116,10 @@ public final class PaperPlugin extends JavaPlugin {
 
     public ComponentSerializerAdapter serializerAdapter() {
         return this.componentSerializerAdapter;
+    }
+
+    public ComponentSerializerAdapter chatSerializerAdapter() {
+        return this.chatSerializerAdapter;
     }
 
     public ChatManager chatManager() {

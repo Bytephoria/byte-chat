@@ -41,7 +41,8 @@ public final class AsyncChatListener implements Listener {
                     this.paperPlugin.chatConfiguration(),
                     this.paperPlugin.mentionResolverService(),
                     this.paperPlugin.tagResolverService(),
-                    this.paperPlugin.serializerAdapter()
+                    this.paperPlugin.serializerAdapter(),
+                    this.paperPlugin.chatSerializerAdapter()
             );
 
             asyncChatEvent.renderer(ChatRenderer.viewerUnaware(viewerUnawareChatRenderer));
