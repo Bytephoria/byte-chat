@@ -41,6 +41,27 @@ chat:
   # LEGACY_AMPERSAND → &a, &b, &l, etc.
   text-formatting: true
 
+  pre-processor:
+    # Enables the pre-processor system.
+    # When disabled, player messages are passed to the serializer as-is.
+    enabled: false
+
+    # Template applied to the player's raw input before serialization.
+    # Parsed using the player-input-serializer — output is NOT trusted.
+    # Use {message} as the placeholder for the player's original input.
+    # PlaceholderAPI placeholders are supported (e.g. %player_name%).
+    #
+    # Note: players CAN break tags defined here (e.g. </red>), since the
+    # template is merged with their input before parsing. This is expected.
+    #
+    # Good uses:
+    #   <gray>{message}
+    #   <gray>[Global]</gray> {message}
+    #   <gray>%player_prefix% {message}
+    #
+    # Not suitable for strict/unbreakable formatting or security boundaries.
+    player-input: "<red>{message}"
+
   mentions:
     # Enables the mention system.
     # When disabled, no mentions will be detected,

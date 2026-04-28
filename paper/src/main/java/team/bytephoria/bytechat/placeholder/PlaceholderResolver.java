@@ -38,6 +38,10 @@ public final class PlaceholderResolver {
         throw new NonInstantiableClassException();
     }
 
+    public static @NotNull String resolvePlaceholders(final @NotNull Player player, final @NotNull String text) {
+        return PAPI_ENABLED ? PlaceholderAPI.setPlaceholders(player, text) : text;
+    }
+
     /**
      * Creates a placeholder replacement function for a specific player and message context.
      * <p>

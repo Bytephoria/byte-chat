@@ -121,6 +121,14 @@ public final class ViewerUnawareChatRenderer implements ChatRenderer.ViewerUnawa
             resolvedMessage = tagResult.processedMessage();
         }
 
+        final ChatConfiguration.PreProcessor preProcessor = this.chatConfiguration.chat().preProcessor();
+        if (preProcessor.enabled() && !preProcessor.playerInput().isBlank()) {
+            final String template = preProcessor.playerInput();
+            final String placeholders = PlaceholderResolver.resolvePlaceholders(player, template);
+
+            resolvedMessage = placeholders.replace("{message}", resolvedMessage);
+        }
+
         resolvedMessage = this.sanitizePlayerInput(player, resolvedMessage);
         if (this.chatConfiguration.chat().mentions().enabled() && player.hasPermission(FeaturePermission.Format.MENTION)) {
             resolvedMessage = this.mentionResolverService.resolveMentions(player, resolvedMessage);

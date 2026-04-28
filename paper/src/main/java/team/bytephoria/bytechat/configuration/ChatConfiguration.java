@@ -51,6 +51,9 @@ public final class ChatConfiguration {
         @Setting("text-formatting")
         private boolean textFormatting = true;
 
+        @Setting("pre-processor")
+        private PreProcessor preProcessor = new PreProcessor();
+
         @Setting("mentions")
         private Mentions mentions = new Mentions();
 
@@ -77,6 +80,26 @@ public final class ChatConfiguration {
             return tags;
         }
 
+        public PreProcessor preProcessor() {
+            return this.preProcessor;
+        }
+    }
+
+    @ConfigSerializable
+    public static final class PreProcessor {
+
+        private boolean enabled = true;
+
+        @Setting("player-input")
+        private String playerInput = "{message}";
+
+        public boolean enabled() {
+            return this.enabled;
+        }
+
+        public String playerInput() {
+            return this.playerInput;
+        }
     }
 
     @ConfigSerializable
