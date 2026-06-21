@@ -2,9 +2,12 @@ package team.bytephoria.bytechat.util;
 
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
+import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.util.exception.NonInstantiableClassException;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Utility class for working with {@link Component} objects.
@@ -15,6 +18,15 @@ public final class ComponentUtil {
 
     private ComponentUtil() {
         throw new NonInstantiableClassException();
+    }
+
+    public static @NotNull List<Component> parseStringCollection(final @NotNull Collection<String> lines, final @NotNull ComponentSerializerAdapter serializerAdapter) {
+        final List<Component> components = new ArrayList<>(lines.size());
+        for (final String line : lines) {
+            components.add(serializerAdapter.deserialize(line));
+        }
+
+        return components;
     }
 
     /**

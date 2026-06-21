@@ -62,7 +62,7 @@ public final class PaperPlugin extends JavaPlugin implements ByteChat {
         this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
 
         this.tagRegistry = new DefaultTagRegistry();
-        BuiltinTags.registerDefaults(this.tagRegistry, this.chatConfiguration);
+        BuiltinTags.registerDefaults(this.tagRegistry, this.componentSerializerAdapter, this.chatConfiguration);
         this.tagResolverService = new TagResolverService(this.chatConfiguration, this.tagRegistry);
         this.chatMuteState = new ChatMuteState();
 

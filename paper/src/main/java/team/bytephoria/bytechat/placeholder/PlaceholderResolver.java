@@ -39,7 +39,9 @@ public final class PlaceholderResolver {
     }
 
     public static @NotNull String resolvePlaceholders(final @NotNull Player player, final @NotNull String text) {
-        return PAPI_ENABLED ? PlaceholderAPI.setPlaceholders(player, text) : text;
+        final String finalText = text.replace("{player_name}", player.getName());
+
+        return PAPI_ENABLED ? PlaceholderAPI.setPlaceholders(player, finalText) : finalText;
     }
 
     /**

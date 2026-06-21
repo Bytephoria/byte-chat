@@ -3,6 +3,7 @@ package team.bytephoria.bytechat.tags;
 import org.jetbrains.annotations.NotNull;
 import team.bytephoria.bytechat.api.tag.TagRegistry;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
+import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.tags.builtin.ArmorTag;
 import team.bytephoria.bytechat.tags.builtin.EnderChestTag;
 import team.bytephoria.bytechat.tags.builtin.InventoryTag;
@@ -29,6 +30,7 @@ public final class BuiltinTags {
      */
     public static void registerDefaults(
             final @NotNull TagRegistry registry,
+            final @NotNull ComponentSerializerAdapter serializerAdapter,
             final @NotNull ChatConfiguration configuration
     ) {
         final ChatConfiguration.Tags tags = configuration.chat().tags();
@@ -38,16 +40,16 @@ public final class BuiltinTags {
         }
 
         if (tags.inventory().enabled()) {
-            registry.register(new InventoryTag(tags.inventory()));
+            registry.register(new InventoryTag(serializerAdapter, tags.inventory()));
         }
 
         if (tags.armor().enabled()) {
-            registry.register(new ArmorTag(tags.armor()));
+            registry.register(new ArmorTag(serializerAdapter, tags.armor()));
         }
 
         if (tags.enderChest().enabled()) {
-            registry.register(new EnderChestTag("ec", tags.enderChest()));
-            registry.register(new EnderChestTag("enderchest", tags.enderChest()));
+            registry.register(new EnderChestTag("ec", serializerAdapter, tags.enderChest()));
+            registry.register(new EnderChestTag("enderchest", serializerAdapter, tags.enderChest()));
         }
     }
 }

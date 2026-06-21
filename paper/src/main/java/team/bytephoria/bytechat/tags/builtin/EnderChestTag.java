@@ -3,16 +3,21 @@ package team.bytephoria.bytechat.tags.builtin;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickCallback;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import team.bytephoria.bytechat.FeaturePermission;
 import team.bytephoria.bytechat.api.tag.TagContext;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
+import team.bytephoria.bytechat.placeholder.PlaceholderResolver;
+import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.tags.AbstractTags;
 import team.bytephoria.bytechat.ui.EnderChestPreviewMenu;
+import team.bytephoria.bytechat.util.ComponentUtil;
 
 import java.time.Duration;
+import java.util.List;
 
 /**
  * Built-in ender chest tag — a clickable link that opens a preview of the
@@ -21,10 +26,17 @@ import java.time.Duration;
  */
 public final class EnderChestTag extends AbstractTags {
 
+    private final ComponentSerializerAdapter serializerAdapter;
     private final ChatConfiguration.EnderChestTag configuration;
-    public EnderChestTag(final @NotNull String key, final @NotNull ChatConfiguration.EnderChestTag configuration) {
+
+    public EnderChestTag(
+            final @NotNull String key,
+            final @NotNull ComponentSerializerAdapter serializerAdapter,
+            final @NotNull ChatConfiguration.EnderChestTag configuration
+    ) {
         super(key, FeaturePermission.Format.TAG_ENDERCHEST);
         this.configuration = configuration;
+        this.serializerAdapter = serializerAdapter;
     }
 
     @Override
@@ -34,8 +46,14 @@ public final class EnderChestTag extends AbstractTags {
 
         final EnderChestPreviewMenu previewMenu = EnderChestPreviewMenu.create(player, Component.text(title));
         final TextColor color = parseColor(this.configuration.displayColor());
+        final List<String> hoverString = this.configuration.hover();
+
+        hoverString.replaceAll(s -> PlaceholderResolver.resolvePlaceholders(player, s));
+
+        final List<Component> hover = ComponentUtil.parseStringCollection(hoverString, this.serializerAdapter);
 
         return Component.text(this.configuration.displayText(), color)
+                .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT, ComponentUtil.joinLines(hover)))
                 .clickEvent(ClickEvent.callback(audience -> {
                     if (audience instanceof Player clickedPlayer) {
                         clickedPlayer.openInventory(previewMenu.getInventory());

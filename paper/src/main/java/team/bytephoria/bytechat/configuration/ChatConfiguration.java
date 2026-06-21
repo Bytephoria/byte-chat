@@ -4,6 +4,9 @@ package team.bytephoria.bytechat.configuration;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 
+import java.util.Collections;
+import java.util.List;
+
 @ConfigSerializable
 public final class ChatConfiguration {
 
@@ -223,6 +226,7 @@ public final class ChatConfiguration {
             public String emptyHandColor() {
                 return this.emptyHandColor;
             }
+
         }
 
         @ConfigSerializable
@@ -239,6 +243,9 @@ public final class ChatConfiguration {
 
             @Setting("preview-title")
             private String previewTitle = "Inventory of {player_name}";
+
+            @Setting("hover")
+            private List<String> hover = Collections.emptyList();
 
             @Setting("max-clicks")
             private int maxClicks = 10;
@@ -269,6 +276,10 @@ public final class ChatConfiguration {
             public int expirationSeconds() {
                 return this.expirationSeconds;
             }
+
+            public List<String> hover() {
+                return this.hover;
+            }
         }
 
         @ConfigSerializable
@@ -285,6 +296,9 @@ public final class ChatConfiguration {
 
             @Setting("preview-title")
             private String previewTitle = "Armor of {player_name}";
+
+            @Setting("hover")
+            private List<String> hover = Collections.emptyList();
 
             @Setting("max-clicks")
             private int maxClicks = 10;
@@ -315,6 +329,10 @@ public final class ChatConfiguration {
             public int expirationSeconds() {
                 return this.expirationSeconds;
             }
+
+            public List<String> hover() {
+                return this.hover;
+            }
         }
     }
 
@@ -338,6 +356,9 @@ public final class ChatConfiguration {
 
         @Setting("expiration-seconds")
         private int expirationSeconds = 3600;
+
+        @Setting("hover")
+        private List<String> hover = Collections.emptyList();
 
         public boolean enabled() {
             return this.enabled;
@@ -363,6 +384,9 @@ public final class ChatConfiguration {
             return this.expirationSeconds;
         }
 
+        public List<String> hover() {
+            return this.hover;
+        }
     }
 
     @ConfigSerializable

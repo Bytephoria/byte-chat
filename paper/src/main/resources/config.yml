@@ -150,6 +150,16 @@ chat:
       #   - [player_name] : The target player's exact name.
       preview-title: 'Inventory of {player_name}'
 
+      hover:
+        # Lines shown when hovering the [inv] tag.
+        #
+        # Variables:
+        #   - {player_name} : Target player name.
+        #
+        # Example:
+        #   - "<gray>View {player_name}''s inventory</gray>"
+        - "<gray>View {player_name}'s inventory</gray>"
+
       # Maximum number of times the inventory link can be clicked.
       max-clicks: 10
 
@@ -172,6 +182,16 @@ chat:
       #   - [player_name] : The target player's exact name.
       preview-title: 'Armor of {player_name}'
 
+      hover:
+        # Lines shown when hovering the [armor] tag.
+        #
+        # Variables:
+        #   - {player_name} : Target player name.
+        #
+        # Example:
+        #   - "<gray>View equipment of {player_name}</gray>"
+        - "<gray>View equipment of {player_name}</gray>"
+
       # Maximum number of times the armor link can be clicked.
       max-clicks: 10
 
@@ -193,6 +213,17 @@ chat:
       # Variables:
       #   - [player_name] : The real, exact name of the player.
       preview-title: 'Ender Chest of {player_name}'
+
+      hover:
+        # Lines shown when hovering the [ec]/[ender] tag.
+        #
+        # Variables:
+        #   - {player_name} : Target player name.
+        #
+        # Example:
+        #   - "<gray>Open Ender Chest of {player_name}</gray>"
+        - "<gray>Open Ender Chest of {player_name}</gray>"
+
       # Maximum number of times the Ender Chest link can be clicked.
       max-clicks: 10
 
