@@ -15,4 +15,9 @@ public final class MiniMessageComponentSerializerAdapter implements ComponentSer
     public @NotNull String serialize(final @NotNull Component component) {
         return MiniMessage.miniMessage().serialize(component);
     }
+
+    @Override
+    public @NotNull String escape(final @NotNull String input) {
+        return MiniMessage.miniMessage().escapeTags(input);
+    }
 }

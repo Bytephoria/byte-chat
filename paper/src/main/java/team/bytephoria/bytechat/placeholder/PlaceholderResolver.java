@@ -9,7 +9,7 @@ import team.bytephoria.bytechat.util.exception.NonInstantiableClassException;
 import java.util.function.Function;
 
 /**
- * Handles placeholder replacement for chat elements.
+ * Handles placeholder replacement for chat components.
  * <p>
  * This resolver supports:
  * <ul>

@@ -1,4 +1,4 @@
-package team.bytephoria.bytechat.api.registry;
+package team.bytephoria.bytechat.util.registry;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,6 +25,11 @@ public abstract class AbstractRegistry<K, V> implements Registry<K, V> {
     @Override
     public boolean contains(final K key) {
         return this.entries.containsKey(key);
+    }
+
+    @Override
+    public V unregister(final K key) {
+        return this.entries.remove(key);
     }
 
     @Override

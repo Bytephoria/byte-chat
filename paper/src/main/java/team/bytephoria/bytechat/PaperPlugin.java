@@ -2,6 +2,7 @@ package team.bytephoria.bytechat;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,23 +11,27 @@ import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.loader.AbstractConfigurationLoader;
 import org.spongepowered.configurate.yaml.NodeStyle;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
+import team.bytephoria.bytechat.api.access.ByteChat;
+import team.bytephoria.bytechat.api.access.ByteChatProvider;
+import team.bytephoria.bytechat.api.tag.TagRegistry;
+import team.bytephoria.bytechat.chat.ChatMuteState;
 import team.bytephoria.bytechat.commands.ChatCommand;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
-import team.bytephoria.bytechat.configuration.FormatConfiguration;
 import team.bytephoria.bytechat.listener.AsyncChatListener;
-import team.bytephoria.bytechat.loader.ChatFormatLoader;
+import team.bytephoria.bytechat.loader.FormatDirectoryLoader;
 import team.bytephoria.bytechat.manager.ChatManager;
 import team.bytephoria.bytechat.registry.ChatFormatRegistry;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerAdapter;
 import team.bytephoria.bytechat.serializer.component.ComponentSerializerFactory;
 import team.bytephoria.bytechat.service.MentionResolverService;
-import team.bytephoria.bytechat.chat.ChatMuteState;
 import team.bytephoria.bytechat.service.TagResolverService;
+import team.bytephoria.bytechat.tags.BuiltinTags;
+import team.bytephoria.bytechat.tags.DefaultTagRegistry;
 import team.bytephoria.bytechat.ui.listener.InventoryClickListener;
 
 import java.io.File;
 
-public final class PaperPlugin extends JavaPlugin {
+public final class PaperPlugin extends JavaPlugin implements ByteChat {
 
     private ChatConfiguration chatConfiguration;
 
@@ -37,6 +42,7 @@ public final class PaperPlugin extends JavaPlugin {
     private ChatManager chatManager;
     private MentionResolverService mentionResolverService;
     private ChatMuteState chatMuteState;
+    private TagRegistry tagRegistry;
     private TagResolverService tagResolverService;
 
     private Metrics metrics;
@@ -54,13 +60,16 @@ public final class PaperPlugin extends JavaPlugin {
         this.chatFormatRegistry = new ChatFormatRegistry();
         this.chatManager = new ChatManager(this.chatFormatRegistry, this.chatConfiguration);
         this.mentionResolverService = new MentionResolverService(this.chatConfiguration);
-        this.tagResolverService = new TagResolverService(this.chatConfiguration);
+
+        this.tagRegistry = new DefaultTagRegistry();
+        BuiltinTags.registerDefaults(this.tagRegistry, this.chatConfiguration);
+        this.tagResolverService = new TagResolverService(this.chatConfiguration, this.tagRegistry);
         this.chatMuteState = new ChatMuteState();
 
-        final FormatConfiguration formatConfiguration = this.loadConfiguration("formats", FormatConfiguration.class, true);
-        if (formatConfiguration != null) {
-            new ChatFormatLoader(this.chatFormatRegistry, formatConfiguration).load();
-        }
+        ByteChatProvider.setInstance(this);
+        this.getServer().getServicesManager().register(ByteChat.class, this, this, ServicePriority.Normal);
+
+        new FormatDirectoryLoader(this, this.chatFormatRegistry).load();
 
         if (this.chatConfiguration.chat().enabled()) {
             this.getServer().getPluginManager().registerEvents(new AsyncChatListener(this), this);
@@ -77,6 +86,9 @@ public final class PaperPlugin extends JavaPlugin {
         HandlerList.unregisterAll(this);
         this.getServer().getCommandMap().getKnownCommands().remove("bytechat");
 
+        ByteChatProvider.reset();
+        this.getServer().getServicesManager().unregisterAll(this);
+
         if (this.metrics != null) {
             this.metrics.shutdown();
         }
@@ -90,6 +102,7 @@ public final class PaperPlugin extends JavaPlugin {
         this.mentionResolverService = null;
         this.chatManager = null;
         this.chatFormatRegistry = null;
+        this.tagRegistry = null;
         this.tagResolverService = null;
         this.componentSerializerAdapter = null;
         this.chatSerializerAdapter = null;
@@ -164,4 +177,13 @@ public final class PaperPlugin extends JavaPlugin {
         return new File(this.getDataFolder(), fileName + ".yml");
     }
 
+    @Override
+    public @NotNull TagRegistry tagRegistry() {
+        return this.tagRegistry;
+    }
+
+    @Override
+    public @NotNull String version() {
+        return this.getPluginMeta().getVersion();
+    }
 }

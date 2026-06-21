@@ -114,6 +114,15 @@ chat:
     # Set to -1 for unlimited.
     max-tags-per-message: 1
 
+    # When true, surrounding formatting (gradients, rainbow) flows across inline
+    # tags in a single pass — e.g. "<rainbow>hello [inv] world" keeps the rainbow
+    # running through "world" instead of resetting after the tag.
+    # Note: the tag's own text may be recolored by the surrounding gradient.
+    # When false, each tag keeps its configured color and the formatting before it
+    # is closed at the tag boundary (legacy behavior).
+    # Only applies when the player-input-serializer is MiniMessage-based.
+    inline-formatting: true
+
     item:
       # Enables the [item] tag to show the item in the player's main hand.
       enabled: true
@@ -122,7 +131,8 @@ chat:
       empty-hand-text: '[Empty Hand]'
 
       # Color of the empty hand text.
-      # Options: GRAY, RED, YELLOW, etc.
+      # Accepts a named color (GRAY, RED, YELLOW...), a hex value (#55FFFF),
+      # or rgb(r, g, b).
       empty-hand-color: 'GRAY'
 
     inventory:
@@ -138,7 +148,7 @@ chat:
       # Title of the inventory preview GUI.
       # Variables:
       #   - [player_name] : The target player's exact name.
-      preview-title: 'Inventory of [player_name]'
+      preview-title: 'Inventory of {player_name}'
 
       # Maximum number of times the inventory link can be clicked.
       max-clicks: 10
@@ -160,7 +170,7 @@ chat:
       # Title of the armor preview GUI.
       # Variables:
       #   - [player_name] : The target player's exact name.
-      preview-title: 'Armor of [player_name]'
+      preview-title: 'Armor of {player_name}'
 
       # Maximum number of times the armor link can be clicked.
       max-clicks: 10
@@ -182,8 +192,7 @@ chat:
       # Title of the Ender Chest preview GUI.
       # Variables:
       #   - [player_name] : The real, exact name of the player.
-      preview-title: 'Ender Chest of [player_name]'
-
+      preview-title: 'Ender Chest of {player_name}'
       # Maximum number of times the Ender Chest link can be clicked.
       max-clicks: 10
 

@@ -157,6 +157,9 @@ public final class ChatConfiguration {
         @Setting("max-tags-per-message")
         private int maxTagsPerMessage = 1;
 
+        @Setting("inline-formatting")
+        private boolean inlineFormatting = true;
+
         @Setting("item")
         private ItemTag item = new ItemTag();
 
@@ -175,6 +178,10 @@ public final class ChatConfiguration {
 
         public int maxTagsPerMessage() {
             return this.maxTagsPerMessage;
+        }
+
+        public boolean inlineFormatting() {
+            return this.inlineFormatting;
         }
 
         public ItemTag item() {

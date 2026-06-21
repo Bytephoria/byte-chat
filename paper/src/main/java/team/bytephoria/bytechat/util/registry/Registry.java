@@ -1,4 +1,4 @@
-package team.bytephoria.bytechat.api.registry;
+package team.bytephoria.bytechat.util.registry;
 
 import java.util.Map;
 
@@ -33,6 +33,14 @@ public interface Registry<K, V> {
      * @return true if the key exists
      */
     boolean contains(final K key);
+
+    /**
+     * Removes the entry associated with the given key.
+     *
+     * @param key the key to remove
+     * @return the removed value, or {@code null} if no entry existed
+     */
+    V unregister(final K key);
 
     /**
      * Returns an unmodifiable view of all registered entries.
