@@ -3,7 +3,7 @@ package team.bytephoria.bytechat.manager;
 import org.bukkit.permissions.Permissible;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import team.bytephoria.bytechat.api.Prioritizable;
+import team.bytephoria.bytechat.api.util.Prioritizable;
 import team.bytephoria.bytechat.chat.format.ChatFormat;
 import team.bytephoria.bytechat.configuration.ChatConfiguration;
 import team.bytephoria.bytechat.registry.ChatFormatRegistry;

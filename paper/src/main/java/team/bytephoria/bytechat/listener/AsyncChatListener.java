@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import team.bytephoria.bytechat.FeaturePermission;
 import team.bytephoria.bytechat.PaperPlugin;
+import team.bytephoria.bytechat.api.event.ByteChatMessageEvent;
 import team.bytephoria.bytechat.chat.format.ChatFormat;
 import team.bytephoria.bytechat.chat.renderer.ViewerUnawareChatRenderer;
 import team.bytephoria.bytechat.manager.ChatManager;
@@ -21,7 +22,7 @@ public final class AsyncChatListener implements Listener {
         this.paperPlugin = paperPlugin;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onAsyncPlayerChatEvent(final @NotNull AsyncChatEvent asyncChatEvent) {
         final Player player = asyncChatEvent.getPlayer();
 
@@ -33,6 +34,17 @@ public final class AsyncChatListener implements Listener {
 
         final ChatManager chatManager = this.paperPlugin.chatManager();
         final ChatFormat chatFormat = chatManager.search(player);
+
+        final ByteChatMessageEvent messageEvent = new ByteChatMessageEvent(
+                player,
+                chatFormat,
+                asyncChatEvent.signedMessage().message()
+        );
+
+        if (!messageEvent.callEvent()) {
+            asyncChatEvent.setCancelled(true);
+            return;
+        }
 
         if (chatFormat != null) {
             final ViewerUnawareChatRenderer viewerUnawareChatRenderer = new ViewerUnawareChatRenderer(

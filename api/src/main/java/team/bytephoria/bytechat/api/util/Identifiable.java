@@ -1,4 +1,4 @@
-package team.bytephoria.bytechat.api;
+package team.bytephoria.bytechat.api.util;
 
 public interface Identifiable {
 

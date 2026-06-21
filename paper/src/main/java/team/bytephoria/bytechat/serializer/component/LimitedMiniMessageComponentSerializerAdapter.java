@@ -27,4 +27,9 @@ public final class LimitedMiniMessageComponentSerializerAdapter implements Compo
     public @NotNull String serialize(final @NotNull Component component) {
         return LIMITED_MINI_MESSAGE_SERIALIZER.serialize(component);
     }
+
+    @Override
+    public @NotNull String escape(final @NotNull String input) {
+        return LIMITED_MINI_MESSAGE_SERIALIZER.escapeTags(input);
+    }
 }

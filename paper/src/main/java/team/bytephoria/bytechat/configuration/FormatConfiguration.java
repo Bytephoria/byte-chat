@@ -7,43 +7,39 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents a single chat format file ({@code plugins/ByteChat/formats/<id>.yml}).
+ * <p>
+ * The format id is derived from the file name (minus the {@code .yml} extension),
+ * so each file declares one format at its root: a {@code permission}, a
+ * {@code priority}, and an ordered map of {@code components}.
+ */
 @ConfigSerializable
 public final class FormatConfiguration {
 
-    @Setting("formats")
-    private Map<String, ChatFormat> formats = new LinkedHashMap<>();
+    @Setting("permission")
+    private String permission = "";
 
-    public Map<String, ChatFormat> formats() {
-        return this.formats;
+    @Setting("priority")
+    private int priority = 0;
+
+    @Setting("components")
+    private Map<String, ChatComponent> components = new LinkedHashMap<>();
+
+    public String permission() {
+        return this.permission;
+    }
+
+    public int priority() {
+        return this.priority;
+    }
+
+    public Map<String, ChatComponent> components() {
+        return this.components;
     }
 
     @ConfigSerializable
-    public static final class ChatFormat {
-
-        @Setting("permission")
-        private String permission = "";
-
-        @Setting("priority")
-        private int priority = 0;
-
-        @Setting("elements")
-        private Map<String, ChatElement> elements = new LinkedHashMap<>();
-
-        public String permission() {
-            return permission;
-        }
-
-        public int priority() {
-            return this.priority;
-        }
-
-        public Map<String, ChatElement> elements() {
-            return elements;
-        }
-    }
-
-    @ConfigSerializable
-    public static final class ChatElement {
+    public static final class ChatComponent {
 
         @Setting("text")
         private String text = "";
@@ -55,15 +51,15 @@ public final class FormatConfiguration {
         private ClickAction click = new ClickAction();
 
         public String text() {
-            return text;
+            return this.text;
         }
 
         public List<String> hover() {
-            return hover;
+            return this.hover;
         }
 
         public ClickAction click() {
-            return click;
+            return this.click;
         }
     }
 
@@ -77,11 +73,11 @@ public final class FormatConfiguration {
         private String value = "";
 
         public String action() {
-            return action;
+            return this.action;
         }
 
         public String value() {
-            return value;
+            return this.value;
         }
     }
 

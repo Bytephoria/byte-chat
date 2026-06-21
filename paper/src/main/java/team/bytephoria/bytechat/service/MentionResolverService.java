@@ -34,6 +34,7 @@ public final class MentionResolverService {
             final int wordLength = word.length();
             final int minLength = Constants.MINECRAFT_MIN_USERNAME_LENGTH + 1;
             final int maxLength = Constants.MINECRAFT_MAX_USERNAME_LENGTH + 1;
+
             if (wordLength < minLength || wordLength > maxLength) {
                 this.appendWord(stringBuilder, word, i, parts.length);
                 continue;

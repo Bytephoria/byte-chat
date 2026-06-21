@@ -1,4 +1,4 @@
-package team.bytephoria.bytechat.chat.element;
+package team.bytephoria.bytechat.chat.component;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -15,26 +15,26 @@ import java.util.function.Function;
 /**
  * Represents a single visual section of a chat message.
  * <p>
- * Each {@link ChatElement} defines one distinct part of the chat layout —
+ * Each {@link ChatComponent} defines one distinct part of the chat layout —
  * for example, the player's name, a separator, or the message body.
  * <p>
- * A {@code ChatElement} can contain:
+ * A {@code ChatComponent} can contain:
  * <ul>
  *     <li>A format string with optional placeholders (e.g. {@code {player}})</li>
  *     <li>Hover lines rendered as a multi-line tooltip</li>
  *     <li>A click action and value (e.g. {@code SUGGEST_COMMAND})</li>
  * </ul>
  * <p>
- * Alternatively, a {@code ChatElement} may wrap a pre-built {@link Component}
+ * Alternatively, a {@code ChatComponent} may wrap a pre-built {@link Component}
  * directly. In that case all text, hover, and click fields are ignored. This is
  * used by the renderer to inject the player's already-assembled message component
  * without re-deserializing it.
  * <p>
- * Elements are deserialized via a {@link ComponentSerializerAdapter} and later
+ * Components are deserialized via a {@link ComponentSerializerAdapter} and later
  * combined into the full chat line by
  * {@link team.bytephoria.bytechat.chat.format.ChatFormat}.
  */
-public final class ChatElement {
+public final class ChatComponent {
 
     private final @NotNull String text;
     private final @Nullable List<String> hoverLines;
@@ -48,14 +48,14 @@ public final class ChatElement {
     private final @Nullable Component prebuiltComponent;
 
     /**
-     * Creates a standard format-driven element with optional hover and click.
+     * Creates a standard format-driven component with optional hover and click.
      *
      * @param text        the format string; may contain placeholders
      * @param hoverLines  lines to show on hover, or {@code null} / empty for none
      * @param clickAction the click action type, or {@code null} for none
      * @param clickValue  the click action value, or {@code null} / blank for none
      */
-    public ChatElement(
+    public ChatComponent(
             final @NotNull String text,
             final @Nullable List<String> hoverLines,
             final @Nullable ClickEvent.Action clickAction,
@@ -69,14 +69,14 @@ public final class ChatElement {
     }
 
     /**
-     * Creates an element that wraps a pre-built {@link Component}.
+     * Creates a component that wraps a pre-built {@link Component}.
      * <p>
      * Used by the renderer to inject the player's message component directly,
      * bypassing deserialization and placeholder substitution entirely.
      *
      * @param prebuiltComponent the component to return from {@link #toComponent}
      */
-    public ChatElement(final @NotNull Component prebuiltComponent) {
+    public ChatComponent(final @NotNull Component prebuiltComponent) {
         this.text = "";
         this.hoverLines = null;
         this.clickAction = null;
@@ -101,17 +101,17 @@ public final class ChatElement {
     }
 
     /**
-     * Returns {@code true} if this element represents the player's message body.
+     * Returns {@code true} if this component represents the player's message body.
      * <p>
      * The renderer uses this to substitute the pre-assembled message component
      * instead of performing placeholder replacement and deserialization.
      */
-    public boolean isMessageElement() {
+    public boolean isMessageComponent() {
         return this.prebuiltComponent == null && this.text.contains("{message}");
     }
 
     /**
-     * Converts this element into a fully rendered Adventure {@link Component}.
+     * Converts this component into a fully rendered Adventure {@link Component}.
      * <p>
      * If a pre-built component was supplied at construction time, it is returned
      * immediately. Otherwise, placeholders are resolved, the text is deserialized

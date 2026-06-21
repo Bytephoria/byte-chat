@@ -50,6 +50,10 @@ paper {
 
 tasks {
 
+    jar {
+        enabled = false
+    }
+
     runServer {
         minecraftVersion("1.21.11")
     }
@@ -58,7 +62,7 @@ tasks {
 
         relocate("org.bstats", "team.bytephoria.bstats")
 
-        archiveBaseName.set(rootProject.name)
+        archiveBaseName.set(getProjectName(rootProject.name))
         archiveVersion.set(rootProject.version.toString())
         archiveClassifier.set("")
     }

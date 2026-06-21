@@ -84,7 +84,7 @@ Every element can include gradients, hover tooltips, and click actions — all d
 ## Configuration Structure
 
 The base configuration (`formats.yml`) defines how messages are displayed in chat.  
-[Click here](paper/src/main/resources/formats.yml) to view the complete configuration structure.
+[Click here](paper/src/main/resources/formats/default.yml) to view the complete configuration structure.
 
 ---
 
@@ -93,11 +93,11 @@ The base configuration (`formats.yml`) defines how messages are displayed in cha
 1. Download the plugin JAR file.
 2. Place it inside your server’s `plugins` folder.
 3. Start or reload your Paper server.
-4. Edit the `config.yml` and `formats.yml` files to your liking.
+4. Edit the `configuration.yml` and `formats.yml` files to your liking.
 5. Run `/bytechat reload` to apply changes.
 
 ---
 
 ## License
 
-This project is released under the [MIT License](LICENSE), allowing free use, modification, and distribution.
+This project is released under the [MIT License](license), allowing free use, modification, and distribution.

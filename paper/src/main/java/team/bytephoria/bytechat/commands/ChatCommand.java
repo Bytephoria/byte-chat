@@ -83,6 +83,7 @@ public final class ChatCommand extends BukkitCommand {
         if (args.length == 1) {
             return List.of("reload", "mute");
         }
+
         return Collections.emptyList();
     }
 }
