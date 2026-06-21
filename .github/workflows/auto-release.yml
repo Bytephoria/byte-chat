@@ -89,9 +89,6 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog }}
           files: |
             api/build/libs/*.jar
-            platform/bukkit-api/build/libs/*.jar
-            platform/common-bukkit/build/libs/*.jar
-            platform/paper/build/libs/*.jar
-            platform/spigot/build/libs/*.jar
+            paper/build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
