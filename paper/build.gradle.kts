@@ -50,6 +50,10 @@ paper {
 
 tasks {
 
+    assemble {
+        dependsOn(shadowJar)
+    }
+
     jar {
         enabled = false
     }
