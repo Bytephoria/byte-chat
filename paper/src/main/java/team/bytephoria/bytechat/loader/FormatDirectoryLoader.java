@@ -7,14 +7,15 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.yaml.NodeStyle;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
-import team.bytephoria.bytechat.util.Loader;
 import team.bytephoria.bytechat.chat.component.ChatComponent;
 import team.bytephoria.bytechat.chat.format.ChatFormat;
 import team.bytephoria.bytechat.configuration.FormatConfiguration;
 import team.bytephoria.bytechat.registry.ChatFormatRegistry;
+import team.bytephoria.bytechat.util.Loader;
 
 import java.io.File;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -106,15 +107,16 @@ public final class FormatDirectoryLoader implements Loader {
     }
 
     private @Nullable ClickEvent.Action parseClickAction(final @NotNull String actionName) {
-        if (actionName.isEmpty()) {
+        if (actionName.isBlank()) {
             return null;
         }
 
-        try {
-            return ClickEvent.Action.valueOf(actionName.toUpperCase());
-        } catch (final IllegalArgumentException exception) {
-            return null;
-        }
+        return ClickEvent.Action.NAMES.value(
+                actionName
+                        .trim()
+                        .replace('-', '_')
+                        .toLowerCase(Locale.ROOT)
+        );
     }
 
     @Override

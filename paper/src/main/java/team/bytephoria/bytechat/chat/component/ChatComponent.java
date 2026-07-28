@@ -183,7 +183,15 @@ public final class ChatComponent {
             return null;
         }
 
-        return ClickEvent.clickEvent(this.clickAction, this.apply(this.clickValue, replacements));
+        final String value = this.apply(this.clickValue, replacements);
+        return switch (this.clickAction.toString()) {
+            case "open_url" -> ClickEvent.openUrl(value);
+            case "open_file" -> ClickEvent.openFile(value);
+            case "run_command" -> ClickEvent.runCommand(value);
+            case "suggest_command" -> ClickEvent.suggestCommand(value);
+            case "copy_to_clipboard" -> ClickEvent.copyToClipboard(value);
+            default -> null;
+        };
     }
 
     /**
